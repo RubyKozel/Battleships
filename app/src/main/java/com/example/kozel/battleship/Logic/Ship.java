@@ -3,17 +3,19 @@ package com.example.kozel.battleship.Logic;
 public class Ship {
     private int numOfTiles;
     private boolean isDestroyed = false;
+    private int[] placementInBoard;
 
-    public Ship(int numOfTiles){
+    public Ship(int numOfTiles, int[] placementInBoard) {
+        this.numOfTiles = numOfTiles;
+        this.placementInBoard = placementInBoard;
+    }
+
+    public void setNumOfTiles(int numOfTiles) {
         this.numOfTiles = numOfTiles;
     }
 
     public int getNumOfTiles() {
         return numOfTiles;
-    }
-
-    public void setDestroyed(boolean destroyed) {
-        isDestroyed = destroyed;
     }
 
     public void destroyShip() {
@@ -22,5 +24,13 @@ public class Ship {
 
     public boolean isDestroyed() {
         return this.isDestroyed;
+    }
+
+    public int[] getPlacementInBoard() {
+        return placementInBoard;
+    }
+
+    public void setPlacementInBoard(int[] placementInBoard) {
+        this.placementInBoard = placementInBoard;
     }
 }
