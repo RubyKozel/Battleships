@@ -1,8 +1,10 @@
 package com.example.kozel.battleship.Logic;
 
+import android.content.SyncStatusObserver;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Board {
 
@@ -15,7 +17,8 @@ public class Board {
         this.difficulty = difficulty;
         this.shipCount = difficulty.getShipCount();
         this.theBoard = new Tile[difficulty.getSize() * difficulty.getSize()];
-        for (Tile t : theBoard) t.setEmpty(true);
+        for (int i = 0; i < theBoard.length; i++)
+            theBoard[i] = new Tile();
         placeShips();
 
     }
@@ -31,18 +34,41 @@ public class Board {
     }
 
     public boolean isAllShipsDestroyed() {
-        for(Ship s : shipList)
-            if(!s.isDestroyed())
+        for (Ship s : shipList)
+            if (!s.isDestroyed())
                 return false;
         return true;
     }
 
-    public boolean markTile(int tile, Tile.TileState state) {
-        if(theBoard[tile].getState() == Tile.TileState.NOT_FIRED){
-            theBoard[tile].setState(state);
+    public boolean markTile(int tile) {
+        if (theBoard[tile].getState() == TileState.NOT_FIRED) {
+            if (theBoard[tile].isEmpty())
+                theBoard[tile].setState(TileState.MISS);
+            else {
+                theBoard[tile].setState(TileState.HIT);
+                Ship s = getShipInTile(tile);
+                if (shipIsDestroyed(s))
+                    s.destroyShip();
+            }
             return true;
         }
         return false;
+    }
+
+    private Ship getShipInTile(int tile) {
+        for (Ship s : shipList) {
+            for (int i : s.getPlacementInBoard())
+                if (i == tile)
+                    return s;
+        }
+        return null;
+    }
+
+    private boolean shipIsDestroyed(Ship s) {
+        for (int i : s.getPlacementInBoard())
+            if (theBoard[i].getState() == TileState.NOT_FIRED)
+                return false;
+        return true;
     }
 
     public Tile[] getTheBoard() {
@@ -75,6 +101,10 @@ public class Board {
 
     public int getShipCount() {
         return shipCount;
+    }
+
+    public Tile getTile(int position) {
+        return theBoard[position];
     }
 }
 

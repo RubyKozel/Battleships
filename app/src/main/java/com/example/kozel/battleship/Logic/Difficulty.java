@@ -1,6 +1,6 @@
 package com.example.kozel.battleship.Logic;
 
-enum Difficulty {
+public enum Difficulty {
     EASY, MEDIUM, HARD;
 
     public int getSize() {
@@ -13,6 +13,19 @@ enum Difficulty {
                 return 12;
             default:
                 return 0;
+        }
+    }
+
+    public int[] getTileSize() {
+        switch (this) {
+            case EASY:
+                return new int[]{135, 96};
+            case MEDIUM:
+                return new int[]{105, 71};
+            case HARD:
+                return new int[]{70, 45};
+            default:
+                return new int[]{0, 0};
         }
     }
 
@@ -62,7 +75,8 @@ enum Difficulty {
                         {131}
                 };
             }
-            default: return new int[0][0];
+            default:
+                return new int[0][0];
         }
     }
 }

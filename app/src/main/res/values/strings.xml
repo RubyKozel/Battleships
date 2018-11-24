@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Battleship</string>
+    <string name="logo">Battleships</string>
+    <string name="start_game_button">Start New Game</string>
+    <string name="easy_button">Easy</string>
+    <string name="medium_button">Medium</string>
+    <string name="hard_button">Hard</string>
+    <string name="turn_display">Computer\'s turn</string>
 </resources>
