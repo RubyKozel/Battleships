@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.kozel.battleship.Logic.BattleshipController;
 import com.example.kozel.battleship.Logic.Difficulty;
@@ -16,8 +17,6 @@ public class BoardsActivity extends AppCompatActivity {
 
     private BattleshipController controller;
     private Difficulty difficulty;
-    private int width;
-    private int height;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,5 +42,30 @@ public class BoardsActivity extends AppCompatActivity {
 
         computerView.setNumColumns(difficulty.getSize());
         computerView.setAdapter(new TileAdapter(getApplicationContext(), controller.getComputerBoard()));
+
+        computerView.setOnItemClickListener((parent, view, position, id) -> {
+            if (controller.getHuman().isTurn()) {
+
+                // Human turn
+                if (controller.humanPlay(position)) {
+                    ((TileAdapter) computerView.getAdapter()).notifyDataSetChanged();
+                    ((TextView) findViewById(R.id.turnView)).setText(R.string.computer_turn_display);
+                    findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+                }
+
+                // Computer turn
+                Thread t = new Thread(() -> {
+                    if (controller.computerPlay()) {
+                        runOnUiThread(() -> {
+                            ((TileAdapter) humanView.getAdapter()).notifyDataSetChanged();
+                            ((TextView) findViewById(R.id.turnView)).setText(R.string.human_turn_display);
+                            findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
+                        });
+                    }
+                });
+
+                t.start();
+            }
+        });
     }
 }

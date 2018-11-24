@@ -1,21 +1,53 @@
 package com.example.kozel.battleship.Logic;
 
+import java.util.ArrayList;
+
 public class BattleshipController {
     private Board humanBoard;
     private Board computerBoard;
-    private Player human = new Player(1);
-    private ComputerPlayer computer = new ComputerPlayer(2);
-    private int turn;
-    private boolean isGameOver = false;
+    private Player human = new Player();
+    private ComputerPlayer computer = new ComputerPlayer();
 
     public BattleshipController(Difficulty difficulty) {
         humanBoard = new Board(difficulty);
+        humanBoard.setShipVisibility(true);
         computerBoard = new Board(difficulty);
-        turn = 1; // human
+        computerBoard.setShipVisibility(false);
+        human.setTurn(true);
     }
 
-    public void switchTurn() {
-        turn = turn == 1 ? 2 : 1;
+    private void switchTurn() {
+        if (human.isTurn()) {
+            computer.setTurn(true);
+            human.setTurn(false);
+        } else {
+            computer.setTurn(false);
+            human.setTurn(true);
+        }
+
+    }
+
+    public boolean humanPlay(int position) {
+        if (human.isTurn()) {
+            if (computerBoard.markTile(position)) {
+                switchTurn();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean computerPlay() {
+        if (computer.isTurn()) {
+            computer.think();
+            ArrayList<Integer> list = humanBoard.getNotChosenTiles();
+            int tile = humanBoard.getNotChosenTiles().remove((int) (Math.random() * list.size()));
+            if (humanBoard.markTile(tile)) {
+                switchTurn();
+                return true;
+            }
+        }
+        return true;
     }
 
     public Board getComputerBoard() {
@@ -24,6 +56,10 @@ public class BattleshipController {
 
     public Board getHumanBoard() {
         return humanBoard;
+    }
+
+    public Player getHuman() {
+        return human;
     }
 }
 

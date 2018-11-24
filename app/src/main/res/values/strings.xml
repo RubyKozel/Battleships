@@ -5,5 +5,6 @@
     <string name="easy_button">Easy</string>
     <string name="medium_button">Medium</string>
     <string name="hard_button">Hard</string>
-    <string name="turn_display">Computer\'s turn</string>
+    <string name="computer_turn_display">Computer\'s turn</string>
+    <string name="human_turn_display">Your turn</string>
 </resources>

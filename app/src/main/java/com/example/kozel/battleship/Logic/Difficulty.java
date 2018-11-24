@@ -42,10 +42,10 @@ public enum Difficulty {
         }
     }
 
-    public int[][] getShipsPlacements() {
+    public Integer[][] getShipsPlacements() {
         switch (this) {
             case EASY: {
-                return new int[][]{
+                return new Integer[][]{
                         {0, 1, 2, 3},
                         {8, 9, 10, 11},
                         {12, 18, 24, 30},
@@ -54,7 +54,7 @@ public enum Difficulty {
                 };
             }
             case MEDIUM: {
-                return new int[][]{
+                return new Integer[][]{
                         {3, 4},
                         {14, 22},
                         {16, 17, 18},
@@ -64,7 +64,7 @@ public enum Difficulty {
                 };
             }
             case HARD: {
-                return new int[][]{
+                return new Integer[][]{
                         {13, 25},
                         {40, 41, 42},
                         {58, 59},
@@ -76,7 +76,7 @@ public enum Difficulty {
                 };
             }
             default:
-                return new int[0][0];
+                return new Integer[0][0];
         }
     }
 }

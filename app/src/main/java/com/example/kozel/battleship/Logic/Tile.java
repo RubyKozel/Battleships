@@ -6,7 +6,7 @@ public class Tile {
     private boolean isEmpty;
 
     public Tile() {
-        state =  TileState.NOT_FIRED;
+        state = TileState.INVISIBLE;
         isEmpty = true;
     }
 
@@ -24,6 +24,12 @@ public class Tile {
 
     public TileState getState() {
         return state;
+    }
+
+    public boolean isNotAlreadyChosen() {
+        return this.getState() != TileState.MISS
+                && this.getState() != TileState.HIT
+                && this.getState() != TileState.DESTROYED;
     }
 }
 
