@@ -47,24 +47,25 @@ public class BoardsActivity extends AppCompatActivity {
             if (controller.getHuman().isTurn()) {
 
                 // Human turn
-                if (controller.humanPlay(position)) {
-                    ((TileAdapter) computerView.getAdapter()).notifyDataSetChanged();
-                    ((TextView) findViewById(R.id.turnView)).setText(R.string.computer_turn_display);
-                    findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
-                }
-
-                // Computer turn
-                Thread t = new Thread(() -> {
-                    if (controller.computerPlay()) {
+                new Thread(() -> {
+                    if (controller.humanPlay(position)) {
                         runOnUiThread(() -> {
-                            ((TileAdapter) humanView.getAdapter()).notifyDataSetChanged();
-                            ((TextView) findViewById(R.id.turnView)).setText(R.string.human_turn_display);
-                            findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
+                            ((TileAdapter) computerView.getAdapter()).notifyDataSetChanged();
+                            ((TextView) findViewById(R.id.turnView)).setText(R.string.computer_turn_display);
+                            findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
                         });
                     }
-                });
+                }).start();
 
-                t.start();
+                // Computer turn
+                new Thread(() -> {
+                    controller.computerPlay();
+                    runOnUiThread(() -> {
+                        ((TileAdapter) humanView.getAdapter()).notifyDataSetChanged();
+                        ((TextView) findViewById(R.id.turnView)).setText(R.string.human_turn_display);
+                        findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
+                    });
+                }).start();
             }
         });
     }

@@ -9,10 +9,17 @@ public class BattleshipController {
     private ComputerPlayer computer = new ComputerPlayer();
 
     public BattleshipController(Difficulty difficulty) {
-        humanBoard = new Board(difficulty);
-        humanBoard.setShipVisibility(true);
-        computerBoard = new Board(difficulty);
-        computerBoard.setShipVisibility(false);
+        Thread t1 = new Thread(() -> humanBoard = new Board(difficulty, true));
+        Thread t2 = new Thread(() -> computerBoard = new Board(difficulty, false));
+        t1.start();
+        t2.start();
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         human.setTurn(true);
     }
 
@@ -37,17 +44,16 @@ public class BattleshipController {
         return false;
     }
 
-    public boolean computerPlay() {
+    public void computerPlay() {
         if (computer.isTurn()) {
             computer.think();
-            ArrayList<Integer> list = humanBoard.getNotChosenTiles();
-            int tile = humanBoard.getNotChosenTiles().remove((int) (Math.random() * list.size()));
-            if (humanBoard.markTile(tile)) {
-                switchTurn();
-                return true;
-            }
+            new Thread(() -> {
+                ArrayList<Integer> list = humanBoard.getNotChosenTiles();
+                int tile = humanBoard.getNotChosenTiles().remove((int) (Math.random() * list.size()));
+                if (humanBoard.markTile(tile))
+                    switchTurn();
+            }).start();
         }
-        return true;
     }
 
     public Board getComputerBoard() {

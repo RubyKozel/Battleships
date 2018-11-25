@@ -9,7 +9,7 @@ public class ComputerPlayer extends Player {
 
     public void think() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException r) {
             r.printStackTrace();
         }

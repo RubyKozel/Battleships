@@ -1,7 +1,6 @@
 package com.example.kozel.battleship;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -49,13 +48,15 @@ public class TileAdapter extends BaseAdapter {
         }
 
 
-        TileState state = board.getTile(position).getState();
-        if (state == TileState.VISIBLE) tileView.getText().setText(state.getStateImage());
-        tileView.setBackgroundResource(
-                state == TileState.HIT ? R.drawable.griditem_bg_hit :
-                        state == TileState.MISS ? R.drawable.griditem_bg_miss :
-                                state == TileState.DESTROYED ? R.drawable.griditem_bg_destroyed :
-                                        R.drawable.griditem_bg_not_fired);
+        new Thread(()-> {
+            TileState state = board.getTile(position).getState();
+            if (state == TileState.VISIBLE) tileView.getText().setText(state.getStateImage());
+            tileView.setBackgroundResource(
+                    state == TileState.HIT ? R.drawable.griditem_bg_hit :
+                            state == TileState.MISS ? R.drawable.griditem_bg_miss :
+                                    state == TileState.DESTROYED ? R.drawable.griditem_bg_destroyed :
+                                            R.drawable.griditem_bg_not_fired);
+        }).start();
         return tileView;
     }
 }

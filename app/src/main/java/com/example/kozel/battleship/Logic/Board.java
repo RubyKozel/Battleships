@@ -1,21 +1,22 @@
 package com.example.kozel.battleship.Logic;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class Board {
 
-    private Map<Ship, Set<Integer>> shipMap = new HashMap<>();
+    private Map<Ship, Set<Tile>> shipMap = new HashMap<>();
+    private Map<Tile, Ship> tileToShip = new HashMap<>();
     private int shipCount;
     private Difficulty difficulty;
     private Tile[] theBoard;
     private ArrayList<Integer> notChosenTiles;
 
-    public Board(Difficulty difficulty) {
+    public Board(Difficulty difficulty, boolean visibility) {
         this.difficulty = difficulty;
         this.shipCount = difficulty.getShipCount();
         this.theBoard = new Tile[difficulty.getSize() * difficulty.getSize()];
@@ -25,15 +26,21 @@ public class Board {
             theBoard[i] = new Tile();
         }
         placeShips();
+        setShipVisibility(visibility);
 
     }
 
     private void placeShips() {
-        Integer[][] placements = difficulty.getShipsPlacements();
-        for (int i = 0; i < shipCount; i++)
-            shipMap.put(new Ship(this, placements[i]),
-                    new HashSet<Integer>(Arrays.asList(placements[i])));
+        Thread t = new Thread(() -> {
+            Integer[][] placements = difficulty.getShipsPlacements();
+            for (int i = 0; i < shipCount; i++) {
+                Ship s = new Ship(this, placements[i]);
+                shipMap.put(s, new HashSet<>(getTilesForPlacements(placements[i])));
+                for (int j : placements[i]) tileToShip.put(theBoard[j], s);
+            }
+        });
 
+        t.start();
     }
 
     public boolean allShipsDestroyed() {
@@ -54,16 +61,12 @@ public class Board {
     }
 
     private Ship getShipInTile(int tile) {
-        for (Map.Entry<Ship, Set<Integer>> entry : shipMap.entrySet()) {
-            if (entry.getValue().contains(tile))
-                return entry.getKey();
-        }
-        return null;
+        return tileToShip.get(theBoard[tile]);
     }
 
     private boolean isShipDestroyed(Ship s) {
-        for (int i : shipMap.get(s))
-            if (theBoard[i].getState() != TileState.HIT) return false;
+        for (Tile t : shipMap.get(s))
+            if (t.getState() != TileState.HIT) return false;
         s.destroyShip();
         return true;
     }
@@ -81,15 +84,22 @@ public class Board {
     }
 
     public void setShipVisibility(boolean shipVisibility) {
-        for (Set<Integer> set : shipMap.values())
-            for (int i : set)
-                theBoard[i].setState(shipVisibility ? TileState.VISIBLE : TileState.INVISIBLE);
+        new Thread(() -> {
+            for (Set<Tile> set : shipMap.values())
+                for (Tile t : set)
+                    t.setState(shipVisibility ? TileState.VISIBLE : TileState.INVISIBLE);
+        }).start();
     }
 
     public ArrayList<Integer> getNotChosenTiles() {
         return notChosenTiles;
     }
 
+    private List<Tile> getTilesForPlacements(Integer[] placements) {
+        List<Tile> tileList = new ArrayList<>();
+        for (int i : placements) tileList.add(theBoard[i]);
+        return tileList;
+    }
 
 }
 
