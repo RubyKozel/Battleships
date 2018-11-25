@@ -40,6 +40,9 @@ public class BattleshipController {
 
     public void checkIfSomeoneWon() {
         //TODO - SLAVA
+        /*
+            Testing push slava=0!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.
+         */
     }
 
     public Board getComputerBoard() {
