@@ -37,6 +37,11 @@ public class BattleshipController {
         }
     }
 
+
+    public void checkIfSomeoneWon() {
+        //TODO - SLAVA
+    }
+
     public Board getComputerBoard() {
         return computerBoard;
     }

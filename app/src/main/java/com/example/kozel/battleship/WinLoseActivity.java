@@ -9,5 +9,7 @@ public class WinLoseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_win_lose);
+
+        //TODO - write this entire activity - SLAVA
     }
 }

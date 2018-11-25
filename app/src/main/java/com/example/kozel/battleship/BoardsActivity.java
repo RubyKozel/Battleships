@@ -53,6 +53,8 @@ public class BoardsActivity extends AppCompatActivity {
                     findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
                 }
 
+                //TODO - check if player won, if so need to go to WinLoseActivity, if not start the below thread - SLAVA
+
                 // Computer turn
                 new Thread(() -> {
                     controller.computerPlay();
@@ -62,6 +64,8 @@ public class BoardsActivity extends AppCompatActivity {
                         findViewById(R.id.progressBar).setVisibility(View.INVISIBLE);
                     });
                 }).start();
+
+                // TODO - check if computer won, if so need to go to WinLoseActivity - SLAVA
             }
         });
     }
