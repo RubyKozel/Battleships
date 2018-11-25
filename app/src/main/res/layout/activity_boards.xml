@@ -8,31 +8,29 @@
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/human_grid"
-        android:layout_width="335dp"
-        android:layout_height="230dp"
+        android:layout_width="360dp"
+        android:layout_height="200dp"
         android:gravity="center"
-        android:stretchMode="columnWidth"
         android:horizontalSpacing="2dp"
+        android:stretchMode="columnWidth"
         android:verticalSpacing="2dp"
         app:layout_constraintBottom_toTopOf="@+id/turnView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/gridview_bg" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/computer_grid"
-        android:layout_width="335dp"
-        android:layout_height="230dp"
+        android:layout_width="360dp"
+        android:layout_height="200dp"
         android:gravity="center"
-        android:stretchMode="columnWidth"
         android:horizontalSpacing="2dp"
+        android:stretchMode="columnWidth"
         android:verticalSpacing="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/turnView"
-        android:background="@drawable/gridview_bg"/>
+        app:layout_constraintTop_toBottomOf="@+id/turnView" />
 
     <TextView
         android:id="@+id/turnView"
@@ -43,14 +41,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/human_turn_display"
+        android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.564"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.497" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -65,5 +62,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.548" />
+        app:layout_constraintVertical_bias="0.559" />
 </android.support.constraint.ConstraintLayout>

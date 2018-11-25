@@ -45,7 +45,7 @@ public class TileAdapter extends BaseAdapter {
         TileView tileView;
         if (convertView == null) {
             tileView = new TileView(context);
-            tileView.setLayoutParams(new GridView.LayoutParams(height / size, width / size));
+            tileView.setLayoutParams(new GridView.LayoutParams(height / size - 4, width / size - 4));
         } else {
             tileView = (TileView) convertView;
         }
