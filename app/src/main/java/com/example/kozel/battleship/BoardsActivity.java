@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ProgressBar;
@@ -38,10 +39,25 @@ public class BoardsActivity extends AppCompatActivity {
         }
 
         humanView.setNumColumns(difficulty.getSize());
-        humanView.setAdapter(new TileAdapter(getApplicationContext(), controller.getHumanBoard()));
+        humanView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                humanView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                humanView.setAdapter(new TileAdapter(getApplicationContext(),
+                        controller.getHumanBoard(), humanView.getWidth(), humanView.getHeight()));
+            }
+        });
 
         computerView.setNumColumns(difficulty.getSize());
-        computerView.setAdapter(new TileAdapter(getApplicationContext(), controller.getComputerBoard()));
+        computerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                humanView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                computerView.setAdapter(new TileAdapter(getApplicationContext(),
+                        controller.getComputerBoard(), computerView.getWidth(), computerView.getHeight()));
+            }
+        });
+
 
         computerView.setOnItemClickListener((parent, view, position, id) -> {
             if (controller.getHuman().isTurn()) {

@@ -22,24 +22,6 @@ public enum Difficulty {
     }
 
     /**
-     * Method that returns the sizes of the tiles, according to the difficulty chosen
-     *
-     * @return - width and height of a single tile
-     */
-    public int[] getTileSize() {
-        switch (this) {
-            case EASY:
-                return new int[]{135, 96};
-            case MEDIUM:
-                return new int[]{105, 71};
-            case HARD:
-                return new int[]{70, 45};
-            default:
-                return new int[]{0, 0};
-        }
-    }
-
-    /**
      * Gets the ship count for the chosen difficulty
      *
      * @return - ship amount to be places in the board

@@ -7,24 +7,27 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 
 import com.example.kozel.battleship.Logic.Board;
-import com.example.kozel.battleship.Logic.Difficulty;
 import com.example.kozel.battleship.Logic.TileState;
 
 public class TileAdapter extends BaseAdapter {
 
     private Board board;
     private Context context;
-    private Difficulty difficulty;
+    private int size;
+    private int height;
+    private int width;
 
-    TileAdapter(Context context, Board board) {
+    TileAdapter(Context context, Board board, int height, int width) {
         this.board = board;
         this.context = context;
-        this.difficulty = board.getDifficulty();
+        this.size = board.getDifficulty().getSize();
+        this.height = height;
+        this.width = width;
     }
 
     @Override
     public int getCount() {
-        return difficulty.getSize() * difficulty.getSize();
+        return size * size;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class TileAdapter extends BaseAdapter {
         TileView tileView;
         if (convertView == null) {
             tileView = new TileView(context);
-            tileView.setLayoutParams(new GridView.LayoutParams(difficulty.getTileSize()[0], difficulty.getTileSize()[1]));
+            tileView.setLayoutParams(new GridView.LayoutParams(height / size, width / size));
         } else {
             tileView = (TileView) convertView;
         }
