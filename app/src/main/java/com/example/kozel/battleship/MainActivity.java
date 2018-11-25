@@ -41,10 +41,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onStartGameClick(View view) {
-        start_game.setVisibility(View.INVISIBLE);
-        easy.setVisibility(View.VISIBLE);
-        medium.setVisibility(View.VISIBLE);
-        hard.setVisibility(View.VISIBLE);
+        runOnUiThread(() -> {
+            start_game.setVisibility(View.INVISIBLE);
+            easy.setVisibility(View.VISIBLE);
+            medium.setVisibility(View.VISIBLE);
+            hard.setVisibility(View.VISIBLE);
+        });
     }
 
     public void onEasyClick(View view) {

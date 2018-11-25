@@ -2,16 +2,18 @@ package com.example.kozel.battleship.Logic;
 
 import android.util.Log;
 
-public class ComputerPlayer extends Player {
+class ComputerPlayer extends Player {
 
-    public ComputerPlayer() {
+    ComputerPlayer() {
     }
 
-    public void think() {
+    int think(int size) {
+        int num = (int) (Math.random() * size);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException r) {
             r.printStackTrace();
         }
+        return num;
     }
 }

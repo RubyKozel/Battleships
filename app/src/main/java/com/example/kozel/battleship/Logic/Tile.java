@@ -5,28 +5,37 @@ public class Tile {
     private TileState state;
     private boolean isEmpty;
 
-    public Tile() {
+    /**
+     * A bean class represents a single tile in the board.</br>
+     * Each tile has a state and isEmpty status
+     */
+    Tile() {
         state = TileState.INVISIBLE;
         isEmpty = true;
     }
 
-    public void setState(TileState state) {
+    void setState(TileState state) {
         this.state = state;
     }
 
-    public boolean isEmpty() {
+    boolean isEmpty() {
         return isEmpty;
     }
 
-    public void setEmpty(boolean isEmpty) {
-        this.isEmpty = isEmpty;
+    void setNotEmpty() {
+        this.isEmpty = false;
     }
 
     public TileState getState() {
         return state;
     }
 
-    public boolean isNotAlreadyChosen() {
+    /**
+     * Checks if this tile as already been chosen by the player
+     *
+     * @return - true if and only if this TileState is not MISS, HIT or DESTROYED
+     */
+    boolean isNotAlreadyChosen() {
         return this.getState() != TileState.MISS
                 && this.getState() != TileState.HIT
                 && this.getState() != TileState.DESTROYED;

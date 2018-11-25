@@ -47,15 +47,11 @@ public class BoardsActivity extends AppCompatActivity {
             if (controller.getHuman().isTurn()) {
 
                 // Human turn
-                new Thread(() -> {
-                    if (controller.humanPlay(position)) {
-                        runOnUiThread(() -> {
-                            ((TileAdapter) computerView.getAdapter()).notifyDataSetChanged();
-                            ((TextView) findViewById(R.id.turnView)).setText(R.string.computer_turn_display);
-                            findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
-                        });
-                    }
-                }).start();
+                if (controller.humanPlay(position)) {
+                    ((TileAdapter) computerView.getAdapter()).notifyDataSetChanged();
+                    ((TextView) findViewById(R.id.turnView)).setText(R.string.computer_turn_display);
+                    findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+                }
 
                 // Computer turn
                 new Thread(() -> {

@@ -3,6 +3,11 @@ package com.example.kozel.battleship.Logic;
 public enum Difficulty {
     EASY, MEDIUM, HARD;
 
+    /**
+     * Method that returns the size of the board
+     *
+     * @return - size of the board according to the chosen difficulty
+     */
     public int getSize() {
         switch (this) {
             case EASY:
@@ -16,6 +21,11 @@ public enum Difficulty {
         }
     }
 
+    /**
+     * Method that returns the sizes of the tiles, according to the difficulty chosen
+     *
+     * @return - width and height of a single tile
+     */
     public int[] getTileSize() {
         switch (this) {
             case EASY:
@@ -29,6 +39,11 @@ public enum Difficulty {
         }
     }
 
+    /**
+     * Gets the ship count for the chosen difficulty
+     *
+     * @return - ship amount to be places in the board
+     */
     public int getShipCount() {
         switch (this) {
             case EASY:
@@ -42,6 +57,11 @@ public enum Difficulty {
         }
     }
 
+    /**
+     * Returns a hard coded ship placements for human board
+     *
+     * @return - a matrix containing the placements
+     */
     public Integer[][] getShipsPlacements() {
         switch (this) {
             case EASY: {
@@ -78,5 +98,15 @@ public enum Difficulty {
             default:
                 return new Integer[0][0];
         }
+    }
+
+    /**
+     * Returns a hard coded ship placements for the computer board
+     *
+     * @return - a matrix containing the placements
+     */
+    public Integer[][] getShipsPlacementsForComputer() {
+        //TODO
+        return null;
     }
 }

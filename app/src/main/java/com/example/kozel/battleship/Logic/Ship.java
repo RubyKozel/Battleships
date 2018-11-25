@@ -1,18 +1,46 @@
 package com.example.kozel.battleship.Logic;
 
-public class Ship {
-    private Board board;
+class Ship {
+    private Tile[] board;
     private Integer[] shipPlacement;
+    private int partsLeft;
 
-    public Ship(Board board, Integer[] shipPlacement) {
+    /**
+     * Class to represent the ship.
+     *
+     * @param board         - the Tile array in which the ship is placed
+     * @param shipPlacement - an Integer array contains the tile numbers the ship is to be placed
+     */
+    Ship(Tile[] board, Integer[] shipPlacement) {
         this.board = board;
         this.shipPlacement = shipPlacement;
-        for (int j : shipPlacement)
-            board.getTheBoard()[j].setEmpty(false);
+        for (int i : shipPlacement)
+            board[i].setNotEmpty();
+        this.partsLeft = shipPlacement.length;
     }
 
-    public void destroyShip() {
+    /**
+     * Indicated whether the ship is destroyed or not
+     *
+     * @return true if partsLeft == 0
+     */
+    boolean isDestroyed() {
+        return partsLeft == 0;
+    }
+
+    /**
+     * Destroys the ship. changing all of its tile states to <b>TileState.DESTROYED</b>
+     */
+    void destroyShip() {
         for (int i : shipPlacement)
-            board.getTheBoard()[i].setState(TileState.DESTROYED);
+            board[i].setState(TileState.DESTROYED);
+    }
+
+    void setPartsLeft(int partsLeft) {
+        this.partsLeft = partsLeft;
+    }
+
+    int getPartsLeft() {
+        return partsLeft;
     }
 }

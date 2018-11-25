@@ -16,7 +16,7 @@ public class TileAdapter extends BaseAdapter {
     private Context context;
     private Difficulty difficulty;
 
-    public TileAdapter(Context context, Board board) {
+    TileAdapter(Context context, Board board) {
         this.board = board;
         this.context = context;
         this.difficulty = board.getDifficulty();
@@ -48,15 +48,13 @@ public class TileAdapter extends BaseAdapter {
         }
 
 
-        new Thread(()-> {
-            TileState state = board.getTile(position).getState();
-            if (state == TileState.VISIBLE) tileView.getText().setText(state.getStateImage());
-            tileView.setBackgroundResource(
-                    state == TileState.HIT ? R.drawable.griditem_bg_hit :
-                            state == TileState.MISS ? R.drawable.griditem_bg_miss :
-                                    state == TileState.DESTROYED ? R.drawable.griditem_bg_destroyed :
-                                            R.drawable.griditem_bg_not_fired);
-        }).start();
+        TileState state = board.getTile(position).getState();
+        if (state == TileState.VISIBLE) tileView.getText().setText(state.getStateImage());
+        tileView.setBackgroundResource(
+                state == TileState.HIT ? R.drawable.griditem_bg_hit :
+                        state == TileState.MISS ? R.drawable.griditem_bg_miss :
+                                state == TileState.DESTROYED ? R.drawable.griditem_bg_destroyed :
+                                        R.drawable.griditem_bg_not_fired);
         return tileView;
     }
 }
