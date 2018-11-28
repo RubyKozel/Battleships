@@ -2,17 +2,14 @@ package com.example.kozel.battleship.Logic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class Board {
 
     /**
-     * This map will contain all the ships in the board and their tile sets
+     * Integer indicating the size of the board in one dimension
      */
-    private Map<Ship, Set<Tile>> shipMap;
+    private int boardSize;
 
     /**
      * This map will contain for each tile, that it's a ship tile, the ship in that tile (for complexity purposes)
@@ -20,12 +17,18 @@ public class Board {
     private Map<Tile, Ship> tileToShip;
 
     /**
+     * This array will contain the amount of ships in each size
+     * arr[0] = ships in size 1, arr[1] = ships in size 2 ... and so on
+     */
+    private int[] shipAmounts = new int[4];
+
+    /**
      * Counts the number of ships in this board
      */
     private int shipCount;
 
     /**
-     * The difficulty of the board, affects the number of ships, the size of the board and their placements
+     * The difficulty of the board, affects the number of ships and the size of the board
      */
     private Difficulty difficulty;
 
@@ -40,7 +43,7 @@ public class Board {
     private ArrayList<Integer> notChosenTiles;
 
     /**
-     * This class repressents a board in the game. </br>
+     * This class represents a board in the game. </br>
      * Given a difficulty, the class initializes a Tile[] array according to the difficulties aspects. </br>
      * It than changes the status of the tiles to visible or invisible according to the visibility parameter
      *
@@ -50,24 +53,27 @@ public class Board {
     Board(Difficulty difficulty, boolean visibility) {
         this.difficulty = difficulty;
         this.shipCount = difficulty.getShipCount();
-        this.theBoard = new Tile[difficulty.getSize() * difficulty.getSize()];
+        this.boardSize = difficulty.getSize();
+        this.theBoard = new Tile[boardSize * boardSize];
         this.notChosenTiles = new ArrayList<>();
-        this.shipMap = new HashMap<>();
         this.tileToShip = new HashMap<>();
         for (int i = 0; i < theBoard.length; i++) {
             notChosenTiles.add(i);
             theBoard[i] = new Tile();
         }
-        placeShips();
-        setShipVisibility(visibility);
+
+        placeShips(visibility);
     }
 
-    private void placeShips() {
-        Integer[][] placements = difficulty.getShipsPlacements();
+    private void placeShips(boolean visibility) {
+        int[][] placements = new ShipPlacer(this).getShipsPlacements();
         for (int i = 0; i < shipCount; i++) {
-            Ship s = new Ship(getTheBoard(), placements[i]);
-            shipMap.put(s, new HashSet<>(getTilesForPlacements(placements[i])));
-            for (int j : placements[i]) tileToShip.put(theBoard[j], s);
+            shipAmounts[placements[i].length - 1]++;
+            Ship s = new Ship(theBoard, placements[i]);
+            for (int j : placements[i]) {
+                tileToShip.put(theBoard[j], s);
+                theBoard[j].setState(visibility ? TileState.VISIBLE : TileState.INVISIBLE);
+            }
         }
     }
 
@@ -88,6 +94,7 @@ public class Board {
                 shipInTile.setPartsLeft(shipInTile.getPartsLeft() - 1);
                 if (shipInTile.isDestroyed()) {
                     shipCount--;
+                    shipAmounts[shipInTile.getSize() - 1]--;
                     shipInTile.destroyShip();
                 }
             }
@@ -108,26 +115,17 @@ public class Board {
         return theBoard[position];
     }
 
-    private Tile[] getTheBoard() {
-        return theBoard;
+    int getBoardSize() {
+        return boardSize;
     }
 
-    private void setShipVisibility(boolean shipVisibility) {
-        for (Set<Tile> set : shipMap.values())
-            for (Tile t : set)
-                t.setState(shipVisibility ? TileState.VISIBLE : TileState.INVISIBLE);
+    public int[] getShipAmounts() {
+        return shipAmounts;
     }
 
     ArrayList<Integer> getNotChosenTiles() {
         return notChosenTiles;
     }
-
-    private List<Tile> getTilesForPlacements(Integer[] placements) {
-        List<Tile> tileList = new ArrayList<>();
-        for (int i : placements) tileList.add(theBoard[i]);
-        return tileList;
-    }
-
 }
 
 

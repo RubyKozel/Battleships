@@ -2,18 +2,19 @@ package com.example.kozel.battleship.Logic;
 
 class Ship {
     private Tile[] board;
-    private Integer[] shipPlacement;
+    private int[] shipPlacement;
     private int partsLeft;
-
+    private int size;
     /**
      * Class to represent the ship.
      *
      * @param board         - the Tile array in which the ship is placed
      * @param shipPlacement - an Integer array contains the tile numbers the ship is to be placed
      */
-    Ship(Tile[] board, Integer[] shipPlacement) {
+    Ship(Tile[] board, int[] shipPlacement) {
         this.board = board;
         this.shipPlacement = shipPlacement;
+        this.size = shipPlacement.length;
         for (int i : shipPlacement)
             board[i].setNotEmpty();
         this.partsLeft = shipPlacement.length;
@@ -42,5 +43,9 @@ class Ship {
 
     int getPartsLeft() {
         return partsLeft;
+    }
+
+    public int getSize() {
+        return size;
     }
 }

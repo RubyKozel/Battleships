@@ -9,8 +9,16 @@ public class BattleshipController {
     private ComputerPlayer computer = new ComputerPlayer();
 
     public BattleshipController(Difficulty difficulty) {
-        humanBoard = new Board(difficulty, true);
-        computerBoard = new Board(difficulty, false);
+        Thread t1 = new Thread(() -> humanBoard = new Board(difficulty, true));
+        Thread t2 = new Thread(() -> computerBoard = new Board(difficulty, false));
+        t1.start();
+        t2.start();
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         human.setTurn(true);
     }
 

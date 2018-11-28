@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         start_game = findViewById(R.id.start_game_button);
+
         easy = findViewById(R.id.easy_button);
         medium = findViewById(R.id.medium_button);
         hard = findViewById(R.id.hard_button);
@@ -41,12 +42,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onStartGameClick(View view) {
-        runOnUiThread(() -> {
-            start_game.setVisibility(View.INVISIBLE);
-            easy.setVisibility(View.VISIBLE);
-            medium.setVisibility(View.VISIBLE);
-            hard.setVisibility(View.VISIBLE);
-        });
+        start_game.setVisibility(View.INVISIBLE);
+        easy.setVisibility(View.VISIBLE);
+        medium.setVisibility(View.VISIBLE);
+        hard.setVisibility(View.VISIBLE);
     }
 
     public void onEasyClick(View view) {

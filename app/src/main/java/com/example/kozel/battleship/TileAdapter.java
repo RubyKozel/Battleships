@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 
 import com.example.kozel.battleship.Logic.Board;
 import com.example.kozel.battleship.Logic.TileState;
@@ -42,22 +43,21 @@ public class TileAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TileView tileView;
+        LinearLayout tileView;
         if (convertView == null) {
-            tileView = new TileView(context);
-            tileView.setLayoutParams(new GridView.LayoutParams(height / size - 4, width / size - 4));
+            tileView = new LinearLayout(context);
+            tileView.setLayoutParams(new GridView.LayoutParams(height / size - 5, width / size - 5));
         } else {
-            tileView = (TileView) convertView;
+            tileView = (LinearLayout) convertView;
         }
 
-
         TileState state = board.getTile(position).getState();
-        if (state == TileState.VISIBLE) tileView.getText().setText(state.getStateImage());
         tileView.setBackgroundResource(
-                state == TileState.HIT ? R.drawable.griditem_bg_hit :
-                        state == TileState.MISS ? R.drawable.griditem_bg_miss :
-                                state == TileState.DESTROYED ? R.drawable.griditem_bg_destroyed :
-                                        R.drawable.griditem_bg_not_fired);
+                state == TileState.VISIBLE ? R.drawable.gridview_bg :
+                        state == TileState.HIT ? R.drawable.griditem_bg_hit :
+                                state == TileState.MISS ? R.drawable.griditem_bg_miss :
+                                        state == TileState.DESTROYED ? R.drawable.griditem_bg_destroyed :
+                                                R.drawable.griditem_bg_not_fired);
         return tileView;
     }
 }

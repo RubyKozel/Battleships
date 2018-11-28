@@ -3,12 +3,10 @@ package com.example.kozel.battleship;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.kozel.battleship.Logic.BattleshipController;
@@ -28,6 +26,7 @@ public class BoardsActivity extends AppCompatActivity {
 
         GridView humanView = findViewById(R.id.human_grid);
         GridView computerView = findViewById(R.id.computer_grid);
+        LinearLayout computersShipsLeft = findViewById(R.id.shipsCountLayout);
 
         Intent intent = getIntent();
 
@@ -38,23 +37,25 @@ public class BoardsActivity extends AppCompatActivity {
             controller = new BattleshipController(difficulty);
         }
 
-        humanView.setNumColumns(difficulty.getSize());
         humanView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 humanView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 humanView.setAdapter(new TileAdapter(getApplicationContext(),
                         controller.getHumanBoard(), humanView.getWidth(), humanView.getHeight()));
+                humanView.setNumColumns(difficulty.getSize());
             }
         });
 
-        computerView.setNumColumns(difficulty.getSize());
+
         computerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 humanView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 computerView.setAdapter(new TileAdapter(getApplicationContext(),
                         controller.getComputerBoard(), computerView.getWidth(), computerView.getHeight()));
+                computerView.setNumColumns(difficulty.getSize());
+                refreshShipAmount(computersShipsLeft);
             }
         });
 
@@ -67,6 +68,7 @@ public class BoardsActivity extends AppCompatActivity {
                     ((TileAdapter) computerView.getAdapter()).notifyDataSetChanged();
                     ((TextView) findViewById(R.id.turnView)).setText(R.string.computer_turn_display);
                     findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+                    refreshShipAmount(computersShipsLeft);
                 }
 
                 //TODO - check if player won, if so need to go to WinLoseActivity, if not start the below thread - SLAVA
@@ -84,5 +86,13 @@ public class BoardsActivity extends AppCompatActivity {
                 // TODO - check if computer won, if so need to go to WinLoseActivity - SLAVA
             }
         });
+    }
+
+    private void refreshShipAmount(LinearLayout computersShipsLeft) {
+        int[] shipAmounts = controller.getComputerBoard().getShipAmounts();
+        int count = computersShipsLeft.getChildCount();
+        for (int i = 0; i < count; i++) {
+            ((TextView) computersShipsLeft.getChildAt(i)).setText(getResources().getString(R.string.sized, (i + 1), shipAmounts[i]));
+        }
     }
 }
