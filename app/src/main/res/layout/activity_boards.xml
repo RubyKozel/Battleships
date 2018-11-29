@@ -4,53 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/boards_bg"
     tools:context=".BoardsActivity">
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/human_grid"
-        android:layout_width="360dp"
-        android:layout_height="210dp"
+        android:layout_width="330dp"
+        android:layout_height="300dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:horizontalSpacing="2dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/computer_grid"
-        android:layout_width="360dp"
-        android:layout_height="210dp"
+        android:layout_width="330dp"
+        android:layout_height="300dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:horizontalSpacing="2dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/human_grid" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
 
     <TextView
         android:id="@+id/turnView"
         android:layout_width="152dp"
         android:layout_height="38dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="@string/human_turn_display"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/human_grid" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -58,77 +60,122 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.74"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/shipsCountLayout"
-        android:layout_width="263dp"
-        android:layout_height="51dp"
+        android:id="@+id/shipsCountLayoutHuman"
+        android:layout_width="250dp"
+        android:layout_height="140dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:layout_weight="1"
+        android:baselineAligned="false"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/human_grid"
-        app:layout_constraintVertical_bias="0.981">
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <TextView
-            android:id="@+id/text_1"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:textAlignment="viewStart"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/four"
+            android:drawablePadding="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/text_2"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:textAlignment="viewStart"
-            android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/text_3"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:textAlignment="viewStart"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/three"
+            android:drawablePadding="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="15sp" />
 
+
         <TextView
-            android:id="@+id/text_4"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:textAlignment="viewStart"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/two"
+            android:drawablePadding="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="15sp" />
+
+
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/one"
+            android:drawablePadding="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="225dp"
-        android:layout_height="32dp"
+    <LinearLayout
+        android:id="@+id/shipsCountLayoutComputer"
+        android:layout_width="250dp"
+        android:layout_height="140dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/ship_left"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/shipsCountLayout"
+        android:layout_weight="1"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/human_grid"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/four"
+            android:drawablePadding="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/three"
+            android:drawablePadding="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/two"
+            android:drawablePadding="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/one"
+            android:drawablePadding="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

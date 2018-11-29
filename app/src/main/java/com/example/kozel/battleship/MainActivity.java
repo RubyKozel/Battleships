@@ -5,15 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.kozel.battleship.Logic.Difficulty;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button start_game;
-    private Button easy;
-    private Button medium;
-    private Button hard;
+    private ImageButton start_game;
+    private ImageButton easy;
+    private ImageButton medium;
+    private ImageButton hard;
 
     private Bundle b;
     private Intent intent;

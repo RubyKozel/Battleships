@@ -43,21 +43,24 @@ public class TileAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LinearLayout tileView;
+        TileView tileView;
         if (convertView == null) {
-            tileView = new LinearLayout(context);
-            tileView.setLayoutParams(new GridView.LayoutParams(height / size - 5, width / size - 5));
+            tileView = new TileView(context);
+            tileView.setLayoutParams(new GridView.LayoutParams(height / size, width / size));
+            tileView.getImage().setLayoutParams(new LinearLayout.LayoutParams(height / size, width / size));
         } else {
-            tileView = (LinearLayout) convertView;
+            tileView = (TileView) convertView;
         }
 
         TileState state = board.getTile(position).getState();
-        tileView.setBackgroundResource(
-                state == TileState.VISIBLE ? R.drawable.gridview_bg :
-                        state == TileState.HIT ? R.drawable.griditem_bg_hit :
-                                state == TileState.MISS ? R.drawable.griditem_bg_miss :
-                                        state == TileState.DESTROYED ? R.drawable.griditem_bg_destroyed :
-                                                R.drawable.griditem_bg_not_fired);
+        int src = state.getStateImage();
+        if (src == 0) {
+            tileView.getImage().setBackgroundResource(R.drawable.gridview_bg);
+        } else if (src == 1) {
+            tileView.getImage().setBackgroundResource(R.drawable.border);
+        } else {
+            tileView.getImage().setImageResource(src);
+        }
         return tileView;
     }
 }

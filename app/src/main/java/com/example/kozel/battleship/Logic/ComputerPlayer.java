@@ -10,7 +10,7 @@ class ComputerPlayer extends Player {
     int think(int size) {
         int num = (int) (Math.random() * size);
         try {
-            Thread.sleep(3000);
+            Thread.sleep(4500);
         } catch (InterruptedException r) {
             r.printStackTrace();
         }

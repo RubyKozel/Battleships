@@ -7,6 +7,5 @@
     <string name="hard_button">Hard</string>
     <string name="computer_turn_display">Computer\'s turn</string>
     <string name="human_turn_display">Your turn</string>
-    <string name="sized">%d size ships: %d</string>
-    <string name="ship_left">Amount of ships left:</string>
+    <string name="sized">%d</string>
 </resources>

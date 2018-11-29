@@ -4,25 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/start_bg"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="307dp"
-        android:layout_height="122dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/logo"
-        android:textSize="60sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.215" />
-
-    <Button
+    <ImageButton
         android:id="@+id/start_game_button"
         android:layout_width="178dp"
         android:layout_height="73dp"
@@ -30,7 +15,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/start_game_button"
+        android:contentDescription="@string/start_game_button"
+        android:background="@drawable/start_game_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,51 +24,54 @@
         app:layout_constraintVertical_bias="0.778"
         android:onClick="onStartGameClick"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/easy_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="290dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/easy_button"
+        android:background="@drawable/easy"
+        android:contentDescription="@string/easy_button"
+        android:onClick="onEasyClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:onClick="onEasyClick"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/medium_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="290dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/medium_button"
+        android:background="@drawable/noraml"
+        android:contentDescription="@string/medium_button"
+        android:onClick="onMediumClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.686"
-        android:onClick="onMediumClick"/>
+        app:layout_constraintVertical_bias="0.686" />
 
-    <Button
+    <ImageButton
         android:id="@+id/hard_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="290dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/hard_button"
+        android:background="@drawable/hard"
+        android:contentDescription="@string/hard_button"
+        android:onClick="onHardClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.899"
-        android:onClick="onHardClick"/>
+        app:layout_constraintVertical_bias="0.88" />
 
 </android.support.constraint.ConstraintLayout>

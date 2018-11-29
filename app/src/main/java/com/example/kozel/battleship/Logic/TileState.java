@@ -1,5 +1,7 @@
 package com.example.kozel.battleship.Logic;
 
+import com.example.kozel.battleship.R;
+
 public enum TileState {
     HIT, MISS, INVISIBLE, VISIBLE, DESTROYED;
 
@@ -8,18 +10,19 @@ public enum TileState {
      *
      * @return - the ImageView represents the state
      */
-    public String getStateImage() { // Should return Image for the state
+    public int getStateImage() { // Should return Image for the state
         switch (this) {
             case HIT:
-                return "HIT";
+                return R.drawable.hit;
             case MISS:
-                return "MISS";
-            case VISIBLE:
-                return "X";
-            case INVISIBLE:
+                return R.drawable.miss;
             case DESTROYED:
+                return R.drawable.skull_big;
+            case VISIBLE:
+                return 0;
+            case INVISIBLE:
             default:
-                return "";
+                return 1;
         }
     }
 }
