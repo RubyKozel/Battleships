@@ -34,12 +34,11 @@ public class BoardsActivity extends AppCompatActivity {
 
         ProgressBar progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
-        TextView turnDisplayer = findViewById(R.id.turnView);
 
         computersShipsLeft.setBackgroundResource(R.drawable.border);
         humanShipsLeft.setBackgroundResource(R.drawable.border);
 
-        animationHandler = new AnimationHandler(humanView, computerView, computersShipsLeft, humanShipsLeft, progressBar, turnDisplayer);
+        animationHandler = new AnimationHandler(humanView, computerView, computersShipsLeft, humanShipsLeft, progressBar, findViewById(R.id.turnView));
 
         Bundle b = getIntent().getBundleExtra(MainActivity.BUNDLE_KEY);
 
@@ -58,7 +57,6 @@ public class BoardsActivity extends AppCompatActivity {
                 refreshShipAmount(humanShipsLeft, controller.getHumanBoard().getShipAmounts());
             }
         });
-
 
         computerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

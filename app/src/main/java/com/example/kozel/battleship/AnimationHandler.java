@@ -38,7 +38,7 @@ class AnimationHandler {
         handler = new Handler();
     }
 
-    public void toggleHumanVisibility() {
+    void toggleHumanVisibility() {
         handler.postDelayed(() -> {
             toggleTurnDisplayAnimation(R.string.computer_turn_display);
             toggleVisibilityAnimation(computerView, View.INVISIBLE);
@@ -52,7 +52,7 @@ class AnimationHandler {
         }, DURATION);
     }
 
-    public void toggleComputerVisibility() {
+    void toggleComputerVisibility() {
         handler.postDelayed(() -> {
             toggleTurnDisplayAnimation(R.string.human_turn_display);
             toggleVisibilityAnimation(humanView, View.INVISIBLE);
@@ -83,29 +83,35 @@ class AnimationHandler {
 
     private void toggleTurnDisplayAnimation(int idOfString) {
         turnDisplayer.setAlpha(HIGH_OPAQUE);
-        turnDisplayer.animate().setDuration(DURATION / 2).alpha(LOW_OPAQUE).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                turnDisplayer.setAlpha(0.0f);
-                turnDisplayer.setText(idOfString);
-                turnDisplayer.animate().setDuration(DURATION / 2).alpha(HIGH_OPAQUE);
-                turnDisplayer.animate().setListener(null);
-            }
-        });
+        turnDisplayer.animate()
+                .setDuration(DURATION / 2)
+                .alpha(LOW_OPAQUE)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        turnDisplayer.setAlpha(0.0f);
+                        turnDisplayer.setText(idOfString);
+                        turnDisplayer.animate().setDuration(DURATION / 2).alpha(HIGH_OPAQUE);
+                        turnDisplayer.animate().setListener(null);
+                    }
+                });
     }
 
     private void toggleProgressBarVisible() {
-        progressBar.animate().setDuration(DURATION).alpha(HIGH_OPAQUE).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                progressBar.setVisibility(View.VISIBLE);
-            }
-        });
+        progressBar.animate()
+                .setDuration(DURATION)
+                .alpha(HIGH_OPAQUE)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        progressBar.setVisibility(View.VISIBLE);
+                    }
+                });
     }
 
-     void toggleProgressBarInvisible() {
+    void toggleProgressBarInvisible() {
         progressBar.setVisibility(View.INVISIBLE);
         progressBar.setAlpha(LOW_OPAQUE);
     }
