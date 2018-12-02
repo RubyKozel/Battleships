@@ -6,18 +6,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import com.example.kozel.battleship.Logic.Difficulty;
+
 
 public class WinLoseActivity extends AppCompatActivity {
 
-    private ImageView win;
-    private ImageView lose;
+    private ImageView status_game;
     private ImageButton main_menu;
     private ImageButton play_again;
-    private String status;
+    private int status;
+    private Difficulty difficulty;
 
     private Bundle b2;
-    private Intent intent;
+    private Intent intent1;
+    private Intent intent2;
 
+    public final static String DIFFICULTY_KEY = "DIFFICULTY";
     public final static String MAIN_KEY = "MAIN_KEY";
     public final static String WIN_LOSE = "WIN_LOSE";
     public final static String PLAY_KEY = "PLAY_KEY";
@@ -28,43 +32,35 @@ public class WinLoseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_win_lose);
 
-        win = findViewById(R.id.win);
-        lose = findViewById(R.id.lose);
+        status_game = findViewById(R.id.win);
         play_again = findViewById(R.id.play_again);
         main_menu = findViewById(R.id.main_menu);
 
-        intent = new Intent(WinLoseActivity.this, MainActivity.class);
+        intent1 = new Intent(WinLoseActivity.this, MainActivity.class);
+        intent2=  new Intent(WinLoseActivity.this, BoardsActivity.class);
         b2 = new Bundle();
 
         Bundle b = getIntent().getBundleExtra(BoardsActivity.BUNDLE_KEY);
 
         if (b != null) {
-            status = b.getString(BoardsActivity.BUNDLE_KEY);
+            difficulty = Difficulty.values()[b.getInt(MainActivity.DIFFICULTY_KEY)];
+            status = b.getInt(BoardsActivity.WIN_LOSE_KEY);
         }
 
-        if (status.equals("win")){
-            win.setVisibility(View.VISIBLE);
-            lose.setVisibility(View.INVISIBLE);
-        }
-        else{
-            win.setVisibility(View.INVISIBLE);
-            lose.setVisibility(View.VISIBLE);
-        }
+        status_game = findViewById(R.id.status_game);
+        status_game.setBackgroundResource(status);
     }
 
     public void onPlayAgainClick(View view)
     {
-        b2.putInt(PLAY_KEY,1);
-        intent.putExtra(BUNDLE_KEY, b2);
+        b2.putInt(PLAY_KEY,difficulty.ordinal());
+        intent2.putExtra(BUNDLE_KEY, b2);
 
-        startActivity(intent);
+        startActivity(intent2);
     }
 
-    public void onMainMenu(View view)
+    public void onMainMenuClick(View view)
     {
-        b2.putInt(PLAY_KEY,1);
-        intent.putExtra(BUNDLE_KEY, b2);
-
-        startActivity(intent);
+        startActivity(intent1);
     }
 }

@@ -27,9 +27,10 @@ public class BoardsActivity extends AppCompatActivity {
     private Intent intent;
 
     public final static String WIN_LOSE_KEY = "WIN_LOSE";
+    public final static String DIFFICULTY_KEY = "DIFFICULTY";
     public final static String BUNDLE_KEY = "BUNDLE";
-    public final static String win = "WIN";
-    public final static String lose = "LOSE";
+    public final static int win = R.drawable.you_win;
+    public final static int lose = R.drawable.game_over;
 
 
     @Override
@@ -54,9 +55,15 @@ public class BoardsActivity extends AppCompatActivity {
         anotherBundle = new Bundle();
 
         Bundle b = getIntent().getBundleExtra(MainActivity.BUNDLE_KEY);
+        Bundle b2 = getIntent().getBundleExtra(MainActivity.BUNDLE_KEY);
 
         if (b != null) {
             difficulty = Difficulty.values()[b.getInt(MainActivity.DIFFICULTY_KEY)];
+            controller = new BattleshipController(difficulty);
+        }
+        else
+        {
+            difficulty = Difficulty.values()[b2.getInt(WinLoseActivity.DIFFICULTY_KEY)];
             controller = new BattleshipController(difficulty);
         }
 
@@ -90,13 +97,14 @@ public class BoardsActivity extends AppCompatActivity {
             if (controller.getHuman().isTurn()) {
                 invokeHumanPlay(position);
                 if (controller.checkIfSomeoneWon(controller.getComputerBoard().getShipCount())) {
-                    anotherBundle.putString(WIN_LOSE_KEY, win);
+                    anotherBundle.putInt(WIN_LOSE_KEY, win);
+                    anotherBundle.putInt(DIFFICULTY_KEY, difficulty.ordinal());
                     intent.putExtra(BUNDLE_KEY, anotherBundle);
                     startActivity(intent);
                 }
                 invokeComputerPlay();
                 if (controller.checkIfSomeoneWon(controller.getHumanBoard().getShipCount())) {
-                    anotherBundle.putString(WIN_LOSE_KEY, lose);
+                    anotherBundle.putInt(WIN_LOSE_KEY, lose);
                     intent.putExtra(BUNDLE_KEY, anotherBundle);
                     startActivity(intent);
                 }
