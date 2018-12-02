@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /*
-    TESTING PUSH
+    TESTING PUSH FROM SLAVA
  */
 
 class AnimationHandler {
