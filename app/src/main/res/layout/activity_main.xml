@@ -48,7 +48,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/noraml"
+        android:background="@drawable/normal"
         android:contentDescription="@string/medium_button"
         android:onClick="onMediumClick"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -8,4 +8,6 @@
     <string name="computer_turn_display">Computer\'s turn</string>
     <string name="human_turn_display">Your turn</string>
     <string name="sized">%d</string>
+    <string name="letter">%c</string>
+    <string name="number">%d</string>
 </resources>

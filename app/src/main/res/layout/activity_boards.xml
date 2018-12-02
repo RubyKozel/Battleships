@@ -41,15 +41,16 @@
 
     <TextView
         android:id="@+id/turnView"
-        android:layout_width="152dp"
-        android:layout_height="38dp"
+        android:layout_width="294dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif"
         android:text="@string/human_turn_display"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,9 +70,9 @@
     <LinearLayout
         android:id="@+id/shipsCountLayoutHuman"
         android:layout_width="250dp"
-        android:layout_height="140dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="116dp"
         android:layout_marginEnd="8dp"
         android:layout_weight="1"
         android:baselineAligned="false"
@@ -86,9 +87,10 @@
             android:layout_height="wrap_content"
             android:drawableBottom="@drawable/four"
             android:drawablePadding="8dp"
+            android:fontFamily="sans-serif"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
 
         <TextView
@@ -96,9 +98,10 @@
             android:layout_height="wrap_content"
             android:drawableBottom="@drawable/three"
             android:drawablePadding="8dp"
+            android:fontFamily="sans-serif"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
 
         <TextView
@@ -106,9 +109,10 @@
             android:layout_height="wrap_content"
             android:drawableBottom="@drawable/two"
             android:drawablePadding="8dp"
+            android:fontFamily="sans-serif"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
 
         <TextView
@@ -116,18 +120,19 @@
             android:layout_height="wrap_content"
             android:drawableBottom="@drawable/one"
             android:drawablePadding="8dp"
+            android:fontFamily="sans-serif"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/shipsCountLayoutComputer"
         android:layout_width="250dp"
-        android:layout_height="140dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="116dp"
         android:layout_marginEnd="8dp"
         android:layout_weight="1"
         android:baselineAligned="false"
@@ -142,9 +147,10 @@
             android:layout_height="wrap_content"
             android:drawableBottom="@drawable/four"
             android:drawablePadding="8dp"
+            android:fontFamily="sans-serif"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
 
         <TextView
@@ -152,9 +158,10 @@
             android:layout_height="wrap_content"
             android:drawableBottom="@drawable/three"
             android:drawablePadding="8dp"
+            android:fontFamily="sans-serif"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
 
         <TextView
@@ -162,9 +169,10 @@
             android:layout_height="wrap_content"
             android:drawableBottom="@drawable/two"
             android:drawablePadding="8dp"
+            android:fontFamily="sans-serif"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
 
         <TextView
@@ -172,9 +180,10 @@
             android:layout_height="wrap_content"
             android:drawableBottom="@drawable/one"
             android:drawablePadding="8dp"
+            android:fontFamily="sans-serif"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="25sp" />
 
     </LinearLayout>
 

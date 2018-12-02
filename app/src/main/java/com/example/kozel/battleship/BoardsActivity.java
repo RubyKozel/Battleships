@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.example.kozel.battleship.Logic.BattleshipController;
 import com.example.kozel.battleship.Logic.Difficulty;
 
+import java.util.ArrayList;
+
 public class BoardsActivity extends AppCompatActivity {
 
     private BattleshipController controller;
