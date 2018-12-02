@@ -9,6 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+/*
+    TESTING PUSH
+ */
+
 class AnimationHandler {
     private Handler handler;
     private GridView humanView;
