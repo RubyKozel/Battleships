@@ -119,6 +119,10 @@ public class Board {
         return boardSize;
     }
 
+    public int getShipCount() {
+        return shipCount;
+    }
+
     public int[] getShipAmounts() {
         return shipAmounts;
     }

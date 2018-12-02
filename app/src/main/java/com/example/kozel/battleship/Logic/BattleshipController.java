@@ -46,11 +46,8 @@ public class BattleshipController {
     }
 
 
-    public void checkIfSomeoneWon() {
-        //TODO - SLAVA
-        /*
-            Testing push slava=0 x 100 = 0 !!!!
-         */
+    public boolean checkIfSomeoneWon(int shipcount) {
+        return shipcount==0;
     }
 
     public Board getComputerBoard() {
@@ -65,4 +62,3 @@ public class BattleshipController {
         return human;
     }
 }
-

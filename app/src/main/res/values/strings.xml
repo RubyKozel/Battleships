@@ -10,4 +10,5 @@
     <string name="sized">%d</string>
     <string name="letter">%c</string>
     <string name="number">%d</string>
+    <string name="play_again">Play Again</string>
 </resources>

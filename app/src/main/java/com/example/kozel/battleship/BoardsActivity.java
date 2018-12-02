@@ -1,5 +1,6 @@
 package com.example.kozel.battleship;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,11 +9,9 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.example.kozel.battleship.Logic.BattleshipController;
 import com.example.kozel.battleship.Logic.Difficulty;
 
-import java.util.ArrayList;
 
 public class BoardsActivity extends AppCompatActivity {
 
@@ -23,6 +22,15 @@ public class BoardsActivity extends AppCompatActivity {
     private LinearLayout computersShipsLeft;
     private LinearLayout humanShipsLeft;
     private AnimationHandler animationHandler;
+
+    private Bundle anotherBundle;
+    private Intent intent;
+
+    public final static String WIN_LOSE_KEY = "WIN_LOSE";
+    public final static String BUNDLE_KEY = "BUNDLE";
+    public final static String win = "WIN";
+    public final static String lose = "LOSE";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +49,9 @@ public class BoardsActivity extends AppCompatActivity {
         humanShipsLeft.setBackgroundResource(R.drawable.border);
 
         animationHandler = new AnimationHandler(humanView, computerView, computersShipsLeft, humanShipsLeft, progressBar, findViewById(R.id.turnView));
+
+        intent = new Intent(BoardsActivity.this, WinLoseActivity.class);
+        anotherBundle = new Bundle();
 
         Bundle b = getIntent().getBundleExtra(MainActivity.BUNDLE_KEY);
 
@@ -78,13 +89,20 @@ public class BoardsActivity extends AppCompatActivity {
         computerView.setOnItemClickListener((parent, view, position, id) -> {
             if (controller.getHuman().isTurn()) {
                 invokeHumanPlay(position);
-                //TODO - check if player won, if so need to go to WinLoseActivity, if not start the below thread - SLAVA
+                if (controller.checkIfSomeoneWon(controller.getComputerBoard().getShipCount())) {
+                    anotherBundle.putString(WIN_LOSE_KEY, win);
+                    intent.putExtra(BUNDLE_KEY, anotherBundle);
+                    startActivity(intent);
+                }
                 invokeComputerPlay();
-                // TODO - check if computer won, if so need to go to WinLoseActivity - SLAVA
+                if (controller.checkIfSomeoneWon(controller.getHumanBoard().getShipCount())) {
+                    anotherBundle.putString(WIN_LOSE_KEY, lose);
+                    intent.putExtra(BUNDLE_KEY, anotherBundle);
+                    startActivity(intent);
+                }
             }
         });
     }
-
 
     private void invokeHumanPlay(int position) {
         if (controller.humanPlay(position)) {
@@ -109,9 +127,7 @@ public class BoardsActivity extends AppCompatActivity {
     private void refreshShipAmount(LinearLayout shipsLeft, int[] shipAmounts) {
         int count = shipsLeft.getChildCount();
         for (int i = 0; i < count; i++) {
-            ((TextView) shipsLeft
-                    .getChildAt(i))
-                    .setText(getResources().getString(R.string.sized, shipAmounts[count - i - 1]));
+            ((TextView) shipsLeft.getChildAt(i)).setText(getResources().getString(R.string.sized, shipAmounts[count - i - 1]));
         }
     }
 }
