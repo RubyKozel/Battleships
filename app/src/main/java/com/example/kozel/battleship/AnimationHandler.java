@@ -9,9 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-/*
-    TESTING PUSH FROM SLAVA
- */
 
 class AnimationHandler {
     private Handler handler;

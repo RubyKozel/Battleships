@@ -9,20 +9,21 @@
 
     <ImageButton
         android:id="@+id/play_again"
-        android:layout_width="88dp"
-        android:layout_height="68dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/play_again"
+        android:contentDescription="@string/replay"
         android:onClick="onPlayAgainClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.935" />
 
     <ImageView
         android:id="@+id/status_game"
@@ -41,13 +42,14 @@
 
     <ImageButton
         android:id="@+id/main_menu"
-        android:layout_width="61dp"
-        android:layout_height="57dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/mainmenu"
+        android:contentDescription="@string/main_menu"
         android:onClick="onMainMenuClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

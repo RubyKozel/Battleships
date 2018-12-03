@@ -10,4 +10,6 @@
     <string name="sized">%d</string>
     <string name="letter">%c</string>
     <string name="number">%d</string>
+    <string name="main_menu">main menu</string>
+    <string name="replay">replay</string>
 </resources>

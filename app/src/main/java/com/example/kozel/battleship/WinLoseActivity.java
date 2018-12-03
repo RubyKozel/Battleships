@@ -12,8 +12,6 @@ import com.example.kozel.battleship.Logic.Difficulty;
 public class WinLoseActivity extends AppCompatActivity {
 
     private ImageView status_game;
-    private ImageButton main_menu;
-    private ImageButton play_again;
     private int status;
     private Difficulty difficulty;
 
@@ -22,8 +20,6 @@ public class WinLoseActivity extends AppCompatActivity {
     private Intent intent2;
 
     public final static String DIFFICULTY_KEY = "DIFFICULTY";
-    public final static String MAIN_KEY = "MAIN_KEY";
-    public final static String WIN_LOSE = "WIN_LOSE";
     public final static String PLAY_KEY = "PLAY_KEY";
     public final static String BUNDLE_KEY = "BUNDLE";
 
@@ -31,10 +27,6 @@ public class WinLoseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_win_lose);
-
-        status_game = findViewById(R.id.win);
-        play_again = findViewById(R.id.play_again);
-        main_menu = findViewById(R.id.main_menu);
 
         intent1 = new Intent(WinLoseActivity.this, MainActivity.class);
         intent2=  new Intent(WinLoseActivity.this, BoardsActivity.class);
