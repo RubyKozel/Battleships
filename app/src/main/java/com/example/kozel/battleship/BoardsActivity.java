@@ -1,6 +1,7 @@
 package com.example.kozel.battleship;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,8 +10,10 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.example.kozel.battleship.Logic.BattleshipController;
 import com.example.kozel.battleship.Logic.Difficulty;
+
 
 
 public class BoardsActivity extends AppCompatActivity {
@@ -60,9 +63,7 @@ public class BoardsActivity extends AppCompatActivity {
         if (b != null) {
             difficulty = Difficulty.values()[b.getInt(MainActivity.DIFFICULTY_KEY)];
             controller = new BattleshipController(difficulty);
-        }
-        else
-        {
+        } else {
             difficulty = Difficulty.values()[b2.getInt(WinLoseActivity.DIFFICULTY_KEY)];
             controller = new BattleshipController(difficulty);
         }
@@ -103,11 +104,6 @@ public class BoardsActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 invokeComputerPlay();
-                if (controller.checkIfSomeoneWon(controller.getHumanBoard().getShipCount())) {
-                    anotherBundle.putInt(WIN_LOSE_KEY, lose);
-                    intent.putExtra(BUNDLE_KEY, anotherBundle);
-                    startActivity(intent);
-                }
             }
         });
     }
@@ -121,7 +117,20 @@ public class BoardsActivity extends AppCompatActivity {
     }
 
     private void invokeComputerPlay() {
-        new Thread(() -> {
+        new ComputerTask().execute();
+    }
+
+    private void refreshShipAmount(LinearLayout shipsLeft, int[] shipAmounts) {
+        int count = shipsLeft.getChildCount();
+        for (int i = 0; i < count; i++) {
+            ((TextView) shipsLeft.getChildAt(i)).setText(getResources().getString(R.string.sized, shipAmounts[count - i - 1]));
+        }
+    }
+
+    private class ComputerTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
             controller.computerPlay();
             runOnUiThread(() -> {
                 animationHandler.toggleProgressBarInvisible();
@@ -129,13 +138,17 @@ public class BoardsActivity extends AppCompatActivity {
                 refreshShipAmount(humanShipsLeft, controller.getHumanBoard().getShipAmounts());
                 animationHandler.toggleComputerVisibility();
             });
-        }).start();
-    }
+            return null;
+        }
 
-    private void refreshShipAmount(LinearLayout shipsLeft, int[] shipAmounts) {
-        int count = shipsLeft.getChildCount();
-        for (int i = 0; i < count; i++) {
-            ((TextView) shipsLeft.getChildAt(i)).setText(getResources().getString(R.string.sized, shipAmounts[count - i - 1]));
+        @Override
+        protected void onPostExecute(Void v) {
+            if (controller.checkIfSomeoneWon(controller.getHumanBoard().getShipCount())) {
+                anotherBundle.putInt(WIN_LOSE_KEY, lose);
+                anotherBundle.putInt(DIFFICULTY_KEY, difficulty.ordinal());
+                intent.putExtra(BUNDLE_KEY, anotherBundle);
+                startActivity(intent);
+            }
         }
     }
 }
