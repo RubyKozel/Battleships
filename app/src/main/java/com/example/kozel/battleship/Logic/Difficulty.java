@@ -1,7 +1,5 @@
 package com.example.kozel.battleship.Logic;
 
-import java.math.MathContext;
-
 public enum Difficulty {
     EASY, MEDIUM, HARD;
 

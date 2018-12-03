@@ -1,7 +1,5 @@
 package com.example.kozel.battleship.Logic;
 
-import android.util.Log;
-
 class ComputerPlayer extends Player {
 
     ComputerPlayer() {
