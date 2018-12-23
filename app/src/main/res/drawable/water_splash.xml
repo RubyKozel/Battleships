@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-</selector>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/water000" android:duration="50" />
+    <item android:drawable="@drawable/water001" android:duration="50" />
+    <item android:drawable="@drawable/water002" android:duration="50" />
+    <item android:drawable="@drawable/water003" android:duration="50" />
+    <item android:drawable="@drawable/water004" android:duration="50" />
+    <item android:drawable="@drawable/water005" android:duration="50" />
+    <item android:drawable="@drawable/water006" android:duration="50" />
+    <item android:drawable="@drawable/water007" android:duration="50" />
+    <item android:drawable="@drawable/water008" android:duration="50" />
+    <item android:drawable="@drawable/water009" android:duration="50" />
+</animation-list>

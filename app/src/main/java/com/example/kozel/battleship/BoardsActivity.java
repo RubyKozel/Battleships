@@ -1,19 +1,23 @@
 package com.example.kozel.battleship;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.animation.AnimationUtils;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.kozel.battleship.Logic.BattleshipController;
+import com.example.kozel.battleship.Logic.Board;
 import com.example.kozel.battleship.Logic.Difficulty;
-
+import com.example.kozel.battleship.Logic.TileState;
 
 
 public class BoardsActivity extends AppCompatActivity {
@@ -96,7 +100,7 @@ public class BoardsActivity extends AppCompatActivity {
 
         computerView.setOnItemClickListener((parent, view, position, id) -> {
             if (controller.getHuman().isTurn()) {
-                invokeHumanPlay(position);
+                invokeHumanPlay(position, view);
                 if (controller.checkIfSomeoneWon(controller.getComputerBoard().getShipCount())) {
                     anotherBundle.putInt(WIN_LOSE_KEY, win);
                     anotherBundle.putInt(DIFFICULTY_KEY, difficulty.ordinal());
@@ -108,9 +112,12 @@ public class BoardsActivity extends AppCompatActivity {
         });
     }
 
-    private void invokeHumanPlay(int position) {
+    private void invokeHumanPlay(int position, View view) {
+        TileView v = (TileView) view;
+        v.getImage().getBackground();
         if (controller.humanPlay(position)) {
-            ((TileAdapter) computerView.getAdapter()).notifyDataSetChanged();
+            TileState t = controller.getComputerBoard().getTile(position).getState();
+            animationHandler.animateTileOf(computerView, t, view);
             refreshShipAmount(computersShipsLeft, controller.getComputerBoard().getShipAmounts());
             animationHandler.toggleHumanVisibility();
         }
@@ -119,6 +126,8 @@ public class BoardsActivity extends AppCompatActivity {
     private void invokeComputerPlay() {
         new ComputerTask().execute();
     }
+
+
 
     private void refreshShipAmount(LinearLayout shipsLeft, int[] shipAmounts) {
         int count = shipsLeft.getChildCount();
@@ -131,10 +140,11 @@ public class BoardsActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            controller.computerPlay();
+            int position = controller.computerPlay();
             runOnUiThread(() -> {
                 animationHandler.toggleProgressBarInvisible();
-                ((TileAdapter) humanView.getAdapter()).notifyDataSetChanged();
+                TileState t = controller.getHumanBoard().getTile(position).getState();
+                animationHandler.animateTileOf(humanView, t, humanView.getChildAt(position));
                 refreshShipAmount(humanShipsLeft, controller.getHumanBoard().getShipAmounts());
                 animationHandler.toggleComputerVisibility();
             });

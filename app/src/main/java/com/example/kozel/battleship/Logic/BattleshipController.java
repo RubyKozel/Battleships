@@ -37,12 +37,15 @@ public class BattleshipController {
         return false;
     }
 
-    public void computerPlay() {
+    public int computerPlay() {
         if (computer.isTurn()) {
             ArrayList<Integer> list = humanBoard.getNotChosenTiles();
-            humanBoard.markTile(list.remove(computer.think(list.size())));
+            int tile = computer.think(list.size());
+            humanBoard.markTile(list.remove(tile));
             switchTurn();
+            return tile;
         }
+        return -1;
     }
 
 

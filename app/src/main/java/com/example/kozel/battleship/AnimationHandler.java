@@ -2,12 +2,16 @@ package com.example.kozel.battleship;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.example.kozel.battleship.Logic.TileState;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -120,5 +124,44 @@ class AnimationHandler {
     void toggleProgressBarInvisible() {
         progressBar.setVisibility(View.INVISIBLE);
         progressBar.setAlpha(LOW_OPAQUE);
+    }
+
+    /*void animateExplosion(View view) {
+        Drawable d = ((TileView) view).getImage().getBackground();
+        ((TileView) view).getImage().setBackgroundResource(R.drawable.explosion);
+        AnimationDrawable animation = (AnimationDrawable) ((TileView) view).getImage().getBackground();
+        animation.start();
+        ((TileView) view).getImage().setBackground(d);
+        handler.postDelayed(() -> ((TileAdapter) computerView.getAdapter()).notifyDataSetChanged(), 50 * 16);
+    }
+
+    void animateMiss(View view) {
+        Drawable d = ((TileView) view).getImage().getBackground();
+        ((TileView) view).getImage().setBackgroundResource(R.drawable.water_splash);
+        AnimationDrawable animation = (AnimationDrawable) ((TileView) view).getImage().getBackground();
+        animation.start();
+        ((TileView) view).getImage().setBackground(d);
+        handler.postDelayed(() -> ((TileAdapter) computerView.getAdapter()).notifyDataSetChanged(), 50 * 10);
+    }*/
+
+    private void animate(GridView playerView, View view, int drawable, int frames) {
+        Drawable d = ((TileView) view).getImage().getBackground();
+        ((TileView) view).getImage().setBackgroundResource(drawable);
+        AnimationDrawable animation = (AnimationDrawable) ((TileView) view).getImage().getBackground();
+        animation.start();
+
+        handler.postDelayed(() -> {
+            ((TileView) view).getImage().setBackground(d);
+            ((TileAdapter) playerView.getAdapter()).notifyDataSetChanged();
+        }, 50 * frames);
+    }
+
+    void animateTileOf(GridView playerView, TileState t, View view) {
+        if(t == TileState.HIT)
+            animate(playerView, view, R.drawable.explosion, 16);
+        else if (t == TileState.MISS)
+            animate(playerView, view, R.drawable.water_splash, 10);
+        else
+            ((TileAdapter) playerView.getAdapter()).notifyDataSetChanged();
     }
 }
