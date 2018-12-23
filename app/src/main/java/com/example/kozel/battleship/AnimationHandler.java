@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.jetbrains.annotations.NotNull;
+
 
 class AnimationHandler {
     private Handler handler;
@@ -66,12 +68,15 @@ class AnimationHandler {
         }, DURATION);
     }
 
-    private void toggleVisibilityAnimation(View view, int visibility) {
+    private void toggleVisibilityAnimation(@NotNull View view, int visibility) {
         view.setAlpha(visibility == View.VISIBLE ? LOW_OPAQUE : HIGH_OPAQUE);
-        if (visibility == View.VISIBLE)
+        if (visibility == View.VISIBLE) {
             view.setVisibility(visibility);
+            view.setTranslationX(-100f);
+        }
         view.animate()
                 .setDuration(DURATION)
+                .translationXBy(100f)
                 .alpha(visibility == View.VISIBLE ? HIGH_OPAQUE : LOW_OPAQUE)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
