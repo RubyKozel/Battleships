@@ -48,4 +48,6 @@ class Ship {
     public int getSize() {
         return size;
     }
+
+    public int[] getShipPlacement() { return shipPlacement; }
 }

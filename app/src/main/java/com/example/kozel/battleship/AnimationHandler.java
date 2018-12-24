@@ -126,24 +126,6 @@ class AnimationHandler {
         progressBar.setAlpha(LOW_OPAQUE);
     }
 
-    /*void animateExplosion(View view) {
-        Drawable d = ((TileView) view).getImage().getBackground();
-        ((TileView) view).getImage().setBackgroundResource(R.drawable.explosion);
-        AnimationDrawable animation = (AnimationDrawable) ((TileView) view).getImage().getBackground();
-        animation.start();
-        ((TileView) view).getImage().setBackground(d);
-        handler.postDelayed(() -> ((TileAdapter) computerView.getAdapter()).notifyDataSetChanged(), 50 * 16);
-    }
-
-    void animateMiss(View view) {
-        Drawable d = ((TileView) view).getImage().getBackground();
-        ((TileView) view).getImage().setBackgroundResource(R.drawable.water_splash);
-        AnimationDrawable animation = (AnimationDrawable) ((TileView) view).getImage().getBackground();
-        animation.start();
-        ((TileView) view).getImage().setBackground(d);
-        handler.postDelayed(() -> ((TileAdapter) computerView.getAdapter()).notifyDataSetChanged(), 50 * 10);
-    }*/
-
     private void animate(GridView playerView, View view, int drawable, int frames) {
         Drawable d = ((TileView) view).getImage().getBackground();
         ((TileView) view).getImage().setBackgroundResource(drawable);

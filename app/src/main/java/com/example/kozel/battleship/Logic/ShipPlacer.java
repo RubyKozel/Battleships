@@ -1,5 +1,7 @@
 package com.example.kozel.battleship.Logic;
 
+import java.util.ArrayList;
+
 class ShipPlacer {
 
     private Board board;
@@ -21,6 +23,31 @@ class ShipPlacer {
                 }
             }
         }
+        return placements;
+    }
+
+    int[][] getShipPlacements(ArrayList<Ship> destroyedShips) {
+        int[][] placements = new int[board.getDifficulty().getShipCount()][];
+        int[][] availablePlaces = new int[board.getBoardSize()][board.getBoardSize()];
+
+        for (int i = 0; i < destroyedShips.size(); i++) {
+            placements[i] = destroyedShips.get(i).getShipPlacement();
+            for (int j = 0; j < placements[i].length; j++) {
+                availablePlaces[placements[i][j] / board.getBoardSize()][placements[i][j] % board.getBoardSize()] = 1;
+            }
+        }
+
+        for (int i = 0; i < board.getShipCount(); i++) {
+            placements[i] = null;
+            while (placements[i] == null) {
+                if (Math.random() < 0.5) {
+                    placements[i] = tryToPlaceHorz(availablePlaces);
+                } else {
+                    placements[i] = tryToPlaceVert(availablePlaces);
+                }
+            }
+        }
+
         return placements;
     }
 

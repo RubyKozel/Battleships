@@ -1,21 +1,18 @@
 package com.example.kozel.battleship;
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.view.animation.AnimationUtils;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.kozel.battleship.Logic.BattleshipController;
-import com.example.kozel.battleship.Logic.Board;
 import com.example.kozel.battleship.Logic.Difficulty;
 import com.example.kozel.battleship.Logic.TileState;
 
@@ -100,7 +97,7 @@ public class BoardsActivity extends AppCompatActivity {
 
         computerView.setOnItemClickListener((parent, view, position, id) -> {
             if (controller.getHuman().isTurn()) {
-                invokeHumanPlay(position, view);
+                invokeHumanPlay(position, computerView.getChildAt(position));
                 if (controller.checkIfSomeoneWon(controller.getComputerBoard().getShipCount())) {
                     anotherBundle.putInt(WIN_LOSE_KEY, win);
                     anotherBundle.putInt(DIFFICULTY_KEY, difficulty.ordinal());

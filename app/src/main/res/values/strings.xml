@@ -12,4 +12,5 @@
     <string name="number">%d</string>
     <string name="main_menu">main menu</string>
     <string name="replay">replay</string>
+    <string name="highscore_button">High Scores</string>
 </resources>

@@ -18,9 +18,7 @@ public class Tile {
         this.state = state;
     }
 
-    boolean isEmpty() {
-        return isEmpty;
-    }
+    boolean isEmpty() { return isEmpty; }
 
     void setNotEmpty() {
         this.isEmpty = false;
