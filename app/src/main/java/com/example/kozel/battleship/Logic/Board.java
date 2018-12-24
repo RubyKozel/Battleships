@@ -84,22 +84,27 @@ public class Board {
     }
 
     private void replaceShips(boolean visibility) {
-        int[][] newPlacements = new ShipPlacer(this).getShipPlacements(destroyedShips);
-        shipAmounts = new int[4];
-        tileToShip = new HashMap<>();
+        if(destroyedShips.isEmpty())
+            placeShips(visibility);
+        else {
+            int[][] newPlacements = new ShipPlacer(this).getShipPlacements(destroyedShips);
+            shipAmounts = new int[4];
+            tileToShip = new HashMap<>();
 
-        initBoard();
+            initBoard();
 
-        for (Ship s : destroyedShips) {
-            for (int i : s.getShipPlacement()) {
-                tileToShip.put(theBoard[i], s);
-                notChosenTiles.remove(i);
-                theBoard[i].setState(TileState.DESTROYED);
+            for (Ship s : destroyedShips) {
+                for (int i : s.getShipPlacement()) {
+                    tileToShip.put(theBoard[i], s);
+                    notChosenTiles.remove(i);
+                    theBoard[i].setState(TileState.DESTROYED);
+                }
             }
+
+            for (int i = destroyedShips.size(); i < shipCount + destroyedShips.size(); i++)
+                place(newPlacements[i], visibility);
         }
 
-        for (int i = destroyedShips.size(); i < shipCount + destroyedShips.size(); i++)
-            place(newPlacements[i], visibility);
     }
 
     private void place(@NotNull int[] newPlacement, boolean visibility) {
