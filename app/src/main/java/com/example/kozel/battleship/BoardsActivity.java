@@ -1,7 +1,9 @@
 package com.example.kozel.battleship;
 
 import android.content.Intent;
+import android.content.SyncStatusObserver;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.kozel.battleship.Logic.BattleshipController;
+import com.example.kozel.battleship.Logic.Board;
 import com.example.kozel.battleship.Logic.Difficulty;
 import com.example.kozel.battleship.Logic.TileState;
 
@@ -26,7 +29,7 @@ public class BoardsActivity extends AppCompatActivity {
     private LinearLayout computersShipsLeft;
     private LinearLayout humanShipsLeft;
     private AnimationHandler animationHandler;
-
+    private Handler handler;
     private Bundle anotherBundle;
     private Intent intent;
 
@@ -41,6 +44,8 @@ public class BoardsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boards);
+
+        handler = new Handler();
 
         humanView = findViewById(R.id.human_grid);
         computerView = findViewById(R.id.computer_grid);
@@ -98,12 +103,7 @@ public class BoardsActivity extends AppCompatActivity {
         computerView.setOnItemClickListener((parent, view, position, id) -> {
             if (controller.getHuman().isTurn()) {
                 invokeHumanPlay(position, computerView.getChildAt(position));
-                if (controller.checkIfSomeoneWon(controller.getComputerBoard().getShipCount())) {
-                    anotherBundle.putInt(WIN_LOSE_KEY, win);
-                    anotherBundle.putInt(DIFFICULTY_KEY, difficulty.ordinal());
-                    intent.putExtra(BUNDLE_KEY, anotherBundle);
-                    startActivity(intent);
-                }
+                checkWinning(controller.getComputerBoard().getShipCount(), win);
                 invokeComputerPlay();
             }
         });
@@ -121,25 +121,7 @@ public class BoardsActivity extends AppCompatActivity {
     }
 
     private void invokeComputerPlay() {
-        new ComputerTask().execute();
-    }
-
-    public void onTest(View view) {
-        controller.getHumanBoard().replaceShips(true);
-        ((TileAdapter) humanView.getAdapter()).notifyDataSetChanged();
-    }
-
-    private void refreshShipAmount(LinearLayout shipsLeft, int[] shipAmounts) {
-        int count = shipsLeft.getChildCount();
-        for (int i = 0; i < count; i++) {
-            ((TextView) shipsLeft.getChildAt(i)).setText(getResources().getString(R.string.sized, shipAmounts[count - i - 1]));
-        }
-    }
-
-    private class ComputerTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... voids) {
+        new Thread(()-> {
             int position = controller.computerPlay();
             runOnUiThread(() -> {
                 animationHandler.toggleProgressBarInvisible();
@@ -148,17 +130,32 @@ public class BoardsActivity extends AppCompatActivity {
                 refreshShipAmount(humanShipsLeft, controller.getHumanBoard().getShipAmounts());
                 animationHandler.toggleComputerVisibility();
             });
-            return null;
-        }
+        }).start();
 
-        @Override
-        protected void onPostExecute(Void v) {
-            if (controller.checkIfSomeoneWon(controller.getHumanBoard().getShipCount())) {
-                anotherBundle.putInt(WIN_LOSE_KEY, lose);
-                anotherBundle.putInt(DIFFICULTY_KEY, difficulty.ordinal());
-                intent.putExtra(BUNDLE_KEY, anotherBundle);
-                startActivity(intent);
-            }
+        handler.postDelayed(() -> checkWinning(controller.getHumanBoard().getShipCount(), lose), 4500);
+    }
+
+    private void checkWinning(int shipCount, int status) {
+        if (controller.checkIfSomeoneWon(shipCount)) {
+            anotherBundle.putInt(WIN_LOSE_KEY, status);
+            anotherBundle.putInt(DIFFICULTY_KEY, difficulty.ordinal());
+            intent.putExtra(BUNDLE_KEY, anotherBundle);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    public void onTest(View view) {
+        controller.getHumanBoard().replaceShips(true);
+        controller.getHumanBoard().hitRandomShips();
+        ((TileAdapter) humanView.getAdapter()).notifyDataSetChanged();
+        checkWinning(controller.getHumanBoard().getShipCount(), lose);
+    }
+
+    private void refreshShipAmount(LinearLayout shipsLeft, int[] shipAmounts) {
+        int count = shipsLeft.getChildCount();
+        for (int i = 0; i < count; i++) {
+            ((TextView) shipsLeft.getChildAt(i)).setText(getResources().getString(R.string.sized, shipAmounts[count - i - 1]));
         }
     }
 }

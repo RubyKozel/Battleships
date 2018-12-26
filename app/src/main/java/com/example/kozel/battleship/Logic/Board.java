@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class Board {
 
@@ -99,15 +100,16 @@ public class Board {
 
         notChosenTiles.clear();
 
-        for(int i=0;i<theBoard.length;i++){
+        for (int i = 0; i < theBoard.length; i++) {
             notChosenTiles.add(i);
         }
+
         //resetting the board, copying the old
         Tile[] oldBoard = new Tile[theBoard.length];
         for (int i = 0; i < theBoard.length; i++) {
             oldBoard[i] = new Tile(theBoard[i]);
-            if(theBoard[i].getState() == TileState.DESTROYED) {
-                notChosenTiles.remove((Object)i);
+            if (theBoard[i].getState() == TileState.DESTROYED) {
+                notChosenTiles.remove(notChosenTiles.indexOf(i));
                 continue;
             }
             theBoard[i] = new Tile();
@@ -115,7 +117,7 @@ public class Board {
 
         //replacing ships
         for (int i = destroyedShips.size(); i < shipCount + destroyedShips.size(); i++)
-            replace(newPlacements[i - destroyedShips.size()], shipsOnBoard.get(i - destroyedShips.size()), oldBoard, visibility);
+            replace(newPlacements[i], shipsOnBoard.get(i - destroyedShips.size()), oldBoard, visibility);
     }
 
     private void place(int[] newPlacement, boolean visibility) {
@@ -133,11 +135,28 @@ public class Board {
         oldShip.setShipPlacement(newPlacement);
         for (int i = 0; i < newPlacement.length; i++) {
             tileToShip.put(theBoard[newPlacement[i]], oldShip);
-            if(oldBoard[oldPlacement[i]].getState() == TileState.HIT) {
-                notChosenTiles.remove((Object)new Integer(newPlacement[i]));
+            if (oldBoard[oldPlacement[i]].getState() == TileState.HIT) {
+                notChosenTiles.remove(notChosenTiles.indexOf(newPlacement[i]));
                 theBoard[newPlacement[i]].setState(TileState.HIT);
             } else {
                 theBoard[newPlacement[i]].setState(visibility ? TileState.VISIBLE : TileState.INVISIBLE);
+            }
+        }
+    }
+
+    public void hitRandomShips() {
+        int numOfShipsToHit;
+        if (shipsOnBoard.size() == 1)
+            numOfShipsToHit = 1;
+        else
+            numOfShipsToHit = (int) (Math.random() * shipsOnBoard.size());
+        for (int i = 0; i < numOfShipsToHit; i++) {
+            for (int j : shipsOnBoard.get(i).getShipPlacement()) {
+                if (theBoard[j].isNotAlreadyChosen()) {
+                    markTile(j);
+                    notChosenTiles.remove(notChosenTiles.indexOf(j));
+                    break;
+                }
             }
         }
     }
@@ -194,7 +213,7 @@ public class Board {
         return shipAmounts;
     }
 
-    ArrayList<Integer> getNotChosenTiles() {
+    public ArrayList<Integer> getNotChosenTiles() {
         return notChosenTiles;
     }
 

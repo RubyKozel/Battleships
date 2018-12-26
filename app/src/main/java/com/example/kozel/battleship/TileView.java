@@ -13,7 +13,7 @@ public class TileView extends LinearLayout {
         super(context);
         image = new ImageView(context);
         image.setBackgroundResource(R.drawable.griditem_bg_not_fired);
-    //slava=0
+
         addView(image);
     }
 

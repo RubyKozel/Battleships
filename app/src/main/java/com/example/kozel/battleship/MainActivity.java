@@ -1,12 +1,8 @@
 package com.example.kozel.battleship;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
 
 import com.example.kozel.battleship.Logic.Difficulty;
 
@@ -14,11 +10,6 @@ public class MainActivity extends AppCompatActivity implements
         ChooseDifficultyFragment.onButtonClickedListener,
         AppStartFragment.onButtonClickedListener,
         HighScoresFragment.onButtonClickedListener {
-
-    private ImageButton start_game;
-    private ImageButton easy;
-    private ImageButton medium;
-    private ImageButton hard;
 
     private Bundle b;
     private Intent intent;
@@ -47,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements
         b.putInt(DIFFICULTY_KEY, Difficulty.EASY.ordinal());
         intent.putExtra(BUNDLE_KEY, b);
 
+        getPreferences(MODE_PRIVATE)
+                .edit()
+                .putInt(DIFFICULTY_KEY, Difficulty.EASY.ordinal())
+                .apply();
+
         startActivity(intent);
         finish();
     }
@@ -55,6 +51,11 @@ public class MainActivity extends AppCompatActivity implements
     public void onButtonMedium() {
         b.putInt(DIFFICULTY_KEY, Difficulty.MEDIUM.ordinal());
         intent.putExtra(BUNDLE_KEY, b);
+
+        getPreferences(MODE_PRIVATE)
+                .edit()
+                .putInt(DIFFICULTY_KEY, Difficulty.MEDIUM.ordinal())
+                .apply();
 
         startActivity(intent);
         finish();
@@ -65,17 +66,39 @@ public class MainActivity extends AppCompatActivity implements
         b.putInt(DIFFICULTY_KEY, Difficulty.HARD.ordinal());
         intent.putExtra(BUNDLE_KEY, b);
 
+        getPreferences(MODE_PRIVATE)
+                .edit()
+                .putInt(DIFFICULTY_KEY, Difficulty.HARD.ordinal())
+                .apply();
+
         startActivity(intent);
         finish();
     }
 
     @Override
     public void onButtonGameStart() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, new ChooseDifficultyFragment())
-                .addToBackStack(null)
-                .commit();
+        int difficulty = getPreferences(MODE_PRIVATE)
+                .getInt(DIFFICULTY_KEY, -1);
+        if (difficulty != -1) {
+            switch (difficulty) {
+                case 0:
+                    onButtonEasy();
+                    break;
+                case 1:
+                    onButtonMedium();
+                    break;
+                case 2:
+                    onButtonHard();
+                    break;
+                default:
+                    break;
+            }
+        } else
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new ChooseDifficultyFragment())
+                    .addToBackStack(null)
+                    .commit();
     }
 
     @Override

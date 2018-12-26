@@ -5,6 +5,7 @@ import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+
 import com.example.kozel.battleship.Logic.Difficulty;
 
 
@@ -28,7 +29,7 @@ public class WinLoseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_win_lose);
 
         intent1 = new Intent(WinLoseActivity.this, MainActivity.class);
-        intent2=  new Intent(WinLoseActivity.this, BoardsActivity.class);
+        intent2 = new Intent(WinLoseActivity.this, BoardsActivity.class);
         b2 = new Bundle();
 
         Bundle b = getIntent().getBundleExtra(BoardsActivity.BUNDLE_KEY);
@@ -42,16 +43,16 @@ public class WinLoseActivity extends AppCompatActivity {
         status_game.setBackgroundResource(status);
     }
 
-    public void onPlayAgainClick(View view)
-    {
-        b2.putInt(PLAY_KEY,difficulty.ordinal());
+    public void onPlayAgainClick(View view) {
+        b2.putInt(PLAY_KEY, difficulty.ordinal());
         intent2.putExtra(BUNDLE_KEY, b2);
 
         startActivity(intent2);
+        finish();
     }
 
-    public void onMainMenuClick(View view)
-    {
+    public void onMainMenuClick(View view) {
         startActivity(intent1);
+        finish();
     }
 }

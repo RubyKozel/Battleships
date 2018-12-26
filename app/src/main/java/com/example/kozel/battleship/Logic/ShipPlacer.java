@@ -32,46 +32,20 @@ class ShipPlacer {
 
         for (int i = 0; i < destroyedShips.size(); i++) {
             placements[i] = destroyedShips.get(i).getShipPlacement();
-            for (int j = 0; j < placements[i].length; j++) {
+            for (int j = 0; j < placements[i].length; j++)
                 availablePlaces[placements[i][j] / board.getBoardSize()][placements[i][j] % board.getBoardSize()] = 1;
-            }
         }
 
-        for(int i=0;i<shipsOnBoard.size();i++) {
+        for (int i = destroyedShips.size(); i < shipsOnBoard.size() + destroyedShips.size(); i++) {
             placements[i] = null;
             while (placements[i] == null) {
                 if (Math.random() < 0.5) {
-                    placements[i] = tryToPlaceHorz(availablePlaces, shipsOnBoard.get(i).getSize());
+                    placements[i] = tryToPlaceHorz(availablePlaces, shipsOnBoard.get(i - destroyedShips.size()).getSize());
                 } else {
-                    placements[i] = tryToPlaceVert(availablePlaces, shipsOnBoard.get(i).getSize());
+                    placements[i] = tryToPlaceVert(availablePlaces, shipsOnBoard.get(i - destroyedShips.size()).getSize());
                 }
             }
         }
-        return placements;
-    }
-
-    int[][] getShipPlacements(ArrayList<Ship> destroyedShips) {
-        int[][] placements = new int[board.getDifficulty().getShipCount()][];
-        int[][] availablePlaces = new int[board.getBoardSize()][board.getBoardSize()];
-
-        for (int i = 0; i < destroyedShips.size(); i++) {
-            placements[i] = destroyedShips.get(i).getShipPlacement();
-            for (int j = 0; j < placements[i].length; j++) {
-                availablePlaces[placements[i][j] / board.getBoardSize()][placements[i][j] % board.getBoardSize()] = 1;
-            }
-        }
-
-        for (int i = 0; i < board.getShipCount(); i++) {
-            placements[i] = null;
-            while (placements[i] == null) {
-                if (Math.random() < 0.5) {
-                    placements[i] = tryToPlaceHorz(availablePlaces, getRandomSize());
-                } else {
-                    placements[i] = tryToPlaceVert(availablePlaces, getRandomSize());
-                }
-            }
-        }
-
         return placements;
     }
 
