@@ -1,6 +1,5 @@
 package com.example.kozel.battleship.Logic;
 
-import org.jetbrains.annotations.NotNull;
 
 public class Tile {
 
@@ -16,7 +15,7 @@ public class Tile {
         isEmpty = true;
     }
 
-    Tile(@NotNull Tile t) {
+    Tile(Tile t) {
         this.state = t.getState();
         this.isEmpty = t.isEmpty;
     }

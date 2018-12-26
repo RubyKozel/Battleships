@@ -2,8 +2,6 @@ package com.example.kozel.battleship.Logic;
 
 import android.util.Log;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -64,7 +62,7 @@ public class Board {
      * @param difficulty - the difficulty of the game
      * @param visibility - whether or not the ships in the board are visible to the player or not
      */
-    Board(@NotNull Difficulty difficulty, boolean visibility) {
+    Board(Difficulty difficulty, boolean visibility) {
         this.difficulty = difficulty;
         this.shipCount = difficulty.getShipCount();
         this.boardSize = difficulty.getSize();
@@ -120,7 +118,7 @@ public class Board {
             replace(newPlacements[i - destroyedShips.size()], shipsOnBoard.get(i - destroyedShips.size()), oldBoard, visibility);
     }
 
-    private void place(@NotNull int[] newPlacement, boolean visibility) {
+    private void place(int[] newPlacement, boolean visibility) {
         shipAmounts[newPlacement.length - 1]++;
         Ship s = new Ship(theBoard, newPlacement);
         shipsOnBoard.add(s);
@@ -130,7 +128,7 @@ public class Board {
         }
     }
 
-    private void replace(@NotNull int[] newPlacement, @NotNull Ship oldShip, Tile[] oldBoard, boolean visibility) {
+    private void replace(int[] newPlacement, Ship oldShip, Tile[] oldBoard, boolean visibility) {
         int[] oldPlacement = oldShip.getShipPlacement();
         oldShip.setShipPlacement(newPlacement);
         for (int i = 0; i < newPlacement.length; i++) {
