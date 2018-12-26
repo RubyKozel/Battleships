@@ -5,6 +5,7 @@ class Ship {
     private int[] shipPlacement;
     private int partsLeft;
     private int size;
+
     /**
      * Class to represent the ship.
      *
@@ -13,10 +14,7 @@ class Ship {
      */
     Ship(Tile[] board, int[] shipPlacement) {
         this.board = board;
-        this.shipPlacement = shipPlacement;
-        this.size = shipPlacement.length;
-        for (int i : shipPlacement)
-            board[i].setNotEmpty();
+        this.setShipPlacement(shipPlacement);
         this.partsLeft = shipPlacement.length;
     }
 
@@ -41,6 +39,13 @@ class Ship {
         this.partsLeft = partsLeft;
     }
 
+    void setShipPlacement(int[] placement) {
+        this.shipPlacement = placement;
+        this.size = shipPlacement.length;
+        for (int i : shipPlacement)
+            board[i].setNotEmpty();
+    }
+
     int getPartsLeft() {
         return partsLeft;
     }
@@ -49,5 +54,7 @@ class Ship {
         return size;
     }
 
-    public int[] getShipPlacement() { return shipPlacement; }
+    public int[] getShipPlacement() {
+        return shipPlacement;
+    }
 }

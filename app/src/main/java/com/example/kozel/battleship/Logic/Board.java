@@ -1,5 +1,7 @@
 package com.example.kozel.battleship.Logic;
 
+import android.util.Log;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -45,6 +47,11 @@ public class Board {
     private ArrayList<Integer> notChosenTiles;
 
     /**
+     * A list that tracks the total ships left in the board
+     */
+    private ArrayList<Ship> shipsOnBoard;
+
+    /**
      * A list tracking the destroyed ships in the game
      */
     private ArrayList<Ship> destroyedShips;
@@ -64,6 +71,7 @@ public class Board {
         this.theBoard = new Tile[boardSize * boardSize];
         this.notChosenTiles = new ArrayList<>();
         this.destroyedShips = new ArrayList<>();
+        this.shipsOnBoard = new ArrayList<>();
         this.tileToShip = new HashMap<>();
 
         initBoard();
@@ -83,36 +91,56 @@ public class Board {
             place(placements[i], visibility);
     }
 
-    private void replaceShips(boolean visibility) {
-        if(destroyedShips.isEmpty())
-            placeShips(visibility);
-        else {
-            int[][] newPlacements = new ShipPlacer(this).getShipPlacements(destroyedShips);
-            shipAmounts = new int[4];
-            tileToShip = new HashMap<>();
+    public void replaceShips(boolean visibility) {
+        int[][] newPlacements = new ShipPlacer(this).resetPlacements(shipsOnBoard, destroyedShips);
 
-            initBoard();
+        // removing old ship placements
+        for (Ship s : shipsOnBoard)
+            for (int i : s.getShipPlacement())
+                tileToShip.remove(theBoard[i]);
 
-            for (Ship s : destroyedShips) {
-                for (int i : s.getShipPlacement()) {
-                    tileToShip.put(theBoard[i], s);
-                    notChosenTiles.remove(i);
-                    theBoard[i].setState(TileState.DESTROYED);
-                }
+        notChosenTiles.clear();
+
+        for(int i=0;i<theBoard.length;i++){
+            notChosenTiles.add(i);
+        }
+        //resetting the board, copying the old
+        Tile[] oldBoard = new Tile[theBoard.length];
+        for (int i = 0; i < theBoard.length; i++) {
+            oldBoard[i] = new Tile(theBoard[i]);
+            if(theBoard[i].getState() == TileState.DESTROYED) {
+                notChosenTiles.remove((Object)new Integer(i));
+                continue;
             }
-
-            for (int i = destroyedShips.size(); i < shipCount + destroyedShips.size(); i++)
-                place(newPlacements[i], visibility);
+            theBoard[i] = new Tile();
         }
 
+        //replacing ships
+        for (int i = destroyedShips.size(); i < shipCount + destroyedShips.size(); i++)
+            replace(newPlacements[i - destroyedShips.size()], shipsOnBoard.get(i - destroyedShips.size()), oldBoard, visibility);
     }
 
     private void place(@NotNull int[] newPlacement, boolean visibility) {
         shipAmounts[newPlacement.length - 1]++;
         Ship s = new Ship(theBoard, newPlacement);
+        shipsOnBoard.add(s);
         for (int j : newPlacement) {
             tileToShip.put(theBoard[j], s);
             theBoard[j].setState(visibility ? TileState.VISIBLE : TileState.INVISIBLE);
+        }
+    }
+
+    private void replace(@NotNull int[] newPlacement, @NotNull Ship oldShip, Tile[] oldBoard, boolean visibility) {
+        int[] oldPlacement = oldShip.getShipPlacement();
+        oldShip.setShipPlacement(newPlacement);
+        for (int i = 0; i < newPlacement.length; i++) {
+            tileToShip.put(theBoard[newPlacement[i]], oldShip);
+            if(oldBoard[oldPlacement[i]].getState() == TileState.HIT) {
+                notChosenTiles.remove((Object)new Integer(newPlacement[i]));
+                theBoard[newPlacement[i]].setState(TileState.HIT);
+            } else {
+                theBoard[newPlacement[i]].setState(visibility ? TileState.VISIBLE : TileState.INVISIBLE);
+            }
         }
     }
 
@@ -135,6 +163,7 @@ public class Board {
                     shipCount--;
                     shipAmounts[shipInTile.getSize() - 1]--;
                     shipInTile.destroyShip();
+                    shipsOnBoard.remove(shipInTile);
                     destroyedShips.add(shipInTile);
                 }
             }
@@ -143,21 +172,37 @@ public class Board {
         return false;
     }
 
-    private Ship getShipInTile(int tile) { return tileToShip.get(theBoard[tile]); }
+    private Ship getShipInTile(int tile) {
+        return tileToShip.get(theBoard[tile]);
+    }
 
-    public Difficulty getDifficulty() { return difficulty; }
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
 
-    public Tile getTile(int position) { return theBoard[position]; }
+    public Tile getTile(int position) {
+        return theBoard[position];
+    }
 
-    int getBoardSize() { return boardSize; }
+    int getBoardSize() {
+        return boardSize;
+    }
 
-    public int getShipCount() { return shipCount; }
+    public int getShipCount() {
+        return shipCount;
+    }
 
-    public int[] getShipAmounts() { return shipAmounts; }
+    public int[] getShipAmounts() {
+        return shipAmounts;
+    }
 
-    ArrayList<Integer> getNotChosenTiles() { return notChosenTiles; }
+    ArrayList<Integer> getNotChosenTiles() {
+        return notChosenTiles;
+    }
 
-    ArrayList<Ship> getDestroyedShips() { return destroyedShips; }
+    ArrayList<Ship> getDestroyedShips() {
+        return destroyedShips;
+    }
 }
 
 

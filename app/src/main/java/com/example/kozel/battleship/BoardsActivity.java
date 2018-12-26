@@ -124,7 +124,10 @@ public class BoardsActivity extends AppCompatActivity {
         new ComputerTask().execute();
     }
 
-
+    public void onTest(View view) {
+        controller.getHumanBoard().replaceShips(true);
+        ((TileAdapter) humanView.getAdapter()).notifyDataSetChanged();
+    }
 
     private void refreshShipAmount(LinearLayout shipsLeft, int[] shipAmounts) {
         int count = shipsLeft.getChildCount();

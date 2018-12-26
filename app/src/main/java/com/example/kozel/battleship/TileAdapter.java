@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -27,6 +28,10 @@ public class TileAdapter extends BaseAdapter {
         this.size = board.getDifficulty().getSize();
         this.height = height;
         this.width = width;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 
     @Override
@@ -58,10 +63,14 @@ public class TileAdapter extends BaseAdapter {
         TileState state = board.getTile(position).getState();
         int src = state.getStateImage();
         if (src == 0) {
+            tileView.getImage().setImageResource(0);
             tileView.getImage().setBackgroundResource(R.drawable.gridview_bg);
         } else if (src == 1) {
+            tileView.getImage().setImageResource(0);
             tileView.getImage().setBackgroundResource(R.drawable.border);
         } else {
+            if(state == TileState.HIT || state == TileState.DESTROYED)
+                tileView.getImage().setBackgroundResource(R.drawable.gridview_bg);
             tileView.getImage().setImageResource(src);
         }
         return tileView;

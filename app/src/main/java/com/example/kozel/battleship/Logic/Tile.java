@@ -1,5 +1,7 @@
 package com.example.kozel.battleship.Logic;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Tile {
 
     private TileState state;
@@ -12,6 +14,11 @@ public class Tile {
     Tile() {
         state = TileState.INVISIBLE;
         isEmpty = true;
+    }
+
+    Tile(@NotNull Tile t) {
+        this.state = t.getState();
+        this.isEmpty = t.isEmpty;
     }
 
     void setState(TileState state) {

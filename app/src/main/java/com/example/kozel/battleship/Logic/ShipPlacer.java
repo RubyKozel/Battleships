@@ -17,9 +17,33 @@ class ShipPlacer {
             placements[i] = null;
             while (placements[i] == null) {
                 if (Math.random() < 0.5) {
-                    placements[i] = tryToPlaceHorz(availablePlaces);
+                    placements[i] = tryToPlaceHorz(availablePlaces, getRandomSize());
                 } else {
-                    placements[i] = tryToPlaceVert(availablePlaces);
+                    placements[i] = tryToPlaceVert(availablePlaces, getRandomSize());
+                }
+            }
+        }
+        return placements;
+    }
+
+    int[][] resetPlacements(ArrayList<Ship> shipsOnBoard, ArrayList<Ship> destroyedShips) {
+        int[][] placements = new int[board.getDifficulty().getShipCount()][];
+        int[][] availablePlaces = new int[board.getBoardSize()][board.getBoardSize()];
+
+        for (int i = 0; i < destroyedShips.size(); i++) {
+            placements[i] = destroyedShips.get(i).getShipPlacement();
+            for (int j = 0; j < placements[i].length; j++) {
+                availablePlaces[placements[i][j] / board.getBoardSize()][placements[i][j] % board.getBoardSize()] = 1;
+            }
+        }
+
+        for(int i=0;i<shipsOnBoard.size();i++) {
+            placements[i] = null;
+            while (placements[i] == null) {
+                if (Math.random() < 0.5) {
+                    placements[i] = tryToPlaceHorz(availablePlaces, shipsOnBoard.get(i).getSize());
+                } else {
+                    placements[i] = tryToPlaceVert(availablePlaces, shipsOnBoard.get(i).getSize());
                 }
             }
         }
@@ -41,9 +65,9 @@ class ShipPlacer {
             placements[i] = null;
             while (placements[i] == null) {
                 if (Math.random() < 0.5) {
-                    placements[i] = tryToPlaceHorz(availablePlaces);
+                    placements[i] = tryToPlaceHorz(availablePlaces, getRandomSize());
                 } else {
-                    placements[i] = tryToPlaceVert(availablePlaces);
+                    placements[i] = tryToPlaceVert(availablePlaces, getRandomSize());
                 }
             }
         }
@@ -51,25 +75,28 @@ class ShipPlacer {
         return placements;
     }
 
-    private int[] tryToPlaceHorz(int[][] available) {
+    private int getRandomSize() {
         int[] shipSizes = board.getDifficulty().getShipSizes();
+        return (int) (Math.random() * (shipSizes[1] - shipSizes[0] + 1)) + shipSizes[0];
+    }
+
+    private int[] tryToPlaceHorz(int[][] available, int size) {
         int[] placement;
         int randomTileRow = (int) (Math.random() * board.getBoardSize());
-        int randomTileCol, randomSize;
+        int randomTileCol;
         do {
             randomTileCol = (int) (Math.random() * board.getBoardSize());
-            randomSize = (int) (Math.random() * (shipSizes[1] - shipSizes[0] + 1)) + shipSizes[0];
-        } while (randomTileCol + randomSize > board.getBoardSize());
-        placement = new int[randomSize];
+        } while (randomTileCol + size > board.getBoardSize());
+        placement = new int[size];
 
-        for (int i = 0; i < randomSize; i++) {
+        for (int i = 0; i < size; i++) {
             if (available[randomTileRow][randomTileCol + i] != 0) {
                 placement = null;
                 break;
             }
         }
         if (placement != null) {
-            for (int i = 0; i < randomSize; i++) {
+            for (int i = 0; i < size; i++) {
                 available[randomTileRow][randomTileCol + i] = 1;
                 placement[i] = randomTileRow * board.getBoardSize() + randomTileCol + i;
             }
@@ -77,26 +104,24 @@ class ShipPlacer {
         return placement;
     }
 
-    private int[] tryToPlaceVert(int[][] available) {
-        int[] shipSizes = board.getDifficulty().getShipSizes();
+    private int[] tryToPlaceVert(int[][] available, int size) {
         int[] placement;
         int randomTileCol = (int) (Math.random() * board.getBoardSize());
-        int randomTileRow, randomSize;
+        int randomTileRow;
         do {
             randomTileRow = (int) (Math.random() * board.getBoardSize());
-            randomSize = (int) (Math.random() * (shipSizes[1] - shipSizes[0] + 1)) + shipSizes[0];
-        } while (randomTileRow + randomSize > board.getBoardSize());
+        } while (randomTileRow + size > board.getBoardSize());
 
-        placement = new int[randomSize];
+        placement = new int[size];
 
-        for (int i = 0; i < randomSize; i++) {
+        for (int i = 0; i < size; i++) {
             if (available[randomTileRow + i][randomTileCol] != 0) {
                 placement = null;
                 break;
             }
         }
         if (placement != null) {
-            for (int i = 0; i < randomSize; i++) {
+            for (int i = 0; i < size; i++) {
                 available[randomTileRow + i][randomTileCol] = 1;
                 placement[i] = (randomTileRow + i) * board.getBoardSize() + randomTileCol;
             }
