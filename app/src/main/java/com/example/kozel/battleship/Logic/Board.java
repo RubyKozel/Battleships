@@ -109,7 +109,7 @@ public class Board {
         for (int i = 0; i < theBoard.length; i++) {
             oldBoard[i] = new Tile(theBoard[i]);
             if(theBoard[i].getState() == TileState.DESTROYED) {
-                notChosenTiles.remove((Object)new Integer(i));
+                notChosenTiles.remove((Object)i);
                 continue;
             }
             theBoard[i] = new Tile();

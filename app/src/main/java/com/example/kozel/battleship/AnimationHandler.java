@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.example.kozel.battleship.Logic.TileState;
 
-import org.jetbrains.annotations.NotNull;
 
 
 class AnimationHandler {
@@ -72,7 +71,7 @@ class AnimationHandler {
         }, DURATION);
     }
 
-    private void toggleVisibilityAnimation(@NotNull View view, int visibility) {
+    private void toggleVisibilityAnimation(View view, int visibility) {
         view.setAlpha(visibility == View.VISIBLE ? LOW_OPAQUE : HIGH_OPAQUE);
         if (visibility == View.VISIBLE) {
             view.setVisibility(visibility);

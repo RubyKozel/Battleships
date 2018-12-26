@@ -2,7 +2,6 @@ package com.example.kozel.battleship.Logic;
 
 import com.example.kozel.battleship.R;
 
-import org.jetbrains.annotations.Contract;
 
 public enum TileState {
     HIT, MISS, INVISIBLE, VISIBLE, DESTROYED;
@@ -13,7 +12,6 @@ public enum TileState {
      * @return - the ImageView represents the state
      */
 
-    @Contract(pure = true)
     public int getStateImage() { // Should return Image for the state
         switch (this) {
             case HIT:
