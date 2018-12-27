@@ -23,10 +23,10 @@ class AnimationHandler {
     private LinearLayout computersShipsLeft;
     private LinearLayout humanShipsLeft;
     private TextView turnDisplayer;
-    private static final int DURATION = 1500;
-    private static final int DELAY = 500;
-    private static final int LOW_OPAQUE = 0;
-    private static final int HIGH_OPAQUE = 1;
+    public static final int DURATION = 1500;
+    public static final int DELAY = 500;
+    public static final int LOW_OPAQUE = 0;
+    public static final int HIGH_OPAQUE = 1;
 
     AnimationHandler(
             GridView humanView,

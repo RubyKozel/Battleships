@@ -17,6 +17,7 @@
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:stretchMode="columnWidth"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +64,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="68dp"
         android:layout_marginEnd="8dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -77,6 +79,7 @@
         android:layout_weight="1"
         android:baselineAligned="false"
         android:orientation="horizontal"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -186,22 +189,5 @@
             android:textSize="25sp" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="83dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="onTest"
-        android:text="Test"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.179" />
 
 </android.support.constraint.ConstraintLayout>

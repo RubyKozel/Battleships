@@ -1,9 +1,12 @@
 package com.example.kozel.battleship;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
-import android.content.SyncStatusObserver;
-import android.os.AsyncTask;
+import android.content.ServiceConnection;
+import android.hardware.SensorManager;
 import android.os.Handler;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,16 +14,14 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.kozel.battleship.Logic.BattleshipController;
-import com.example.kozel.battleship.Logic.Board;
 import com.example.kozel.battleship.Logic.Difficulty;
 import com.example.kozel.battleship.Logic.TileState;
 
 
-public class BoardsActivity extends AppCompatActivity {
+public class BoardsActivity extends AppCompatActivity implements OrientationsSensorService.AccelerationListener {
 
     private BattleshipController controller;
     private Difficulty difficulty;
@@ -32,12 +33,27 @@ public class BoardsActivity extends AppCompatActivity {
     private Handler handler;
     private Bundle anotherBundle;
     private Intent intent;
+    private OrientationsSensorService service;
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            OrientationsSensorService.LocalBinder binder = (OrientationsSensorService.LocalBinder) service;
+            BoardsActivity.this.service = binder.getService();
+            BoardsActivity.this.service.registerListener(BoardsActivity.this);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+    };
 
     public final static String WIN_LOSE_KEY = "WIN_LOSE";
     public final static String DIFFICULTY_KEY = "DIFFICULTY";
     public final static String BUNDLE_KEY = "BUNDLE";
     public final static int win = R.drawable.you_win;
     public final static int lose = R.drawable.game_over;
+    public final static int COMPUTER_DELAY = 4500;
 
 
     @Override
@@ -45,24 +61,55 @@ public class BoardsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boards);
 
-        handler = new Handler();
+        init();
+        initBundles();
+        registerListeners();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        bindService(new Intent(this, OrientationsSensorService.class), mConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (service != null) {
+            service.getSensorManager().registerListener(service, service.getSensor(), SensorManager.SENSOR_DELAY_NORMAL); // 1,000,000 microsecond = 1 second
+            service.registerListener(this);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (service != null) {
+            service.unregisterListener();
+            service.getSensorManager().unregisterListener(service);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unbindService(mConnection);
+    }
+
+    private void init() {
+        handler = new Handler();
         humanView = findViewById(R.id.human_grid);
         computerView = findViewById(R.id.computer_grid);
         computersShipsLeft = findViewById(R.id.shipsCountLayoutComputer);
         humanShipsLeft = findViewById(R.id.shipsCountLayoutHuman);
-
-        ProgressBar progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.INVISIBLE);
-
         computersShipsLeft.setBackgroundResource(R.drawable.border);
         humanShipsLeft.setBackgroundResource(R.drawable.border);
-
-        animationHandler = new AnimationHandler(humanView, computerView, computersShipsLeft, humanShipsLeft, progressBar, findViewById(R.id.turnView));
-
+        animationHandler = new AnimationHandler(humanView, computerView, computersShipsLeft, humanShipsLeft, findViewById(R.id.progressBar), findViewById(R.id.turnView));
         intent = new Intent(BoardsActivity.this, WinLoseActivity.class);
         anotherBundle = new Bundle();
+    }
 
+    private void initBundles() {
         Bundle b = getIntent().getBundleExtra(MainActivity.BUNDLE_KEY);
         Bundle b2 = getIntent().getBundleExtra(MainActivity.BUNDLE_KEY);
 
@@ -73,7 +120,9 @@ public class BoardsActivity extends AppCompatActivity {
             difficulty = Difficulty.values()[b2.getInt(WinLoseActivity.DIFFICULTY_KEY)];
             controller = new BattleshipController(difficulty);
         }
+    }
 
+    private void registerListeners() {
         humanView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -96,14 +145,11 @@ public class BoardsActivity extends AppCompatActivity {
             }
         });
 
-        humanView.setVisibility(View.INVISIBLE);
-        humanShipsLeft.setVisibility(View.INVISIBLE);
-
-
         computerView.setOnItemClickListener((parent, view, position, id) -> {
             if (controller.getHuman().isTurn()) {
                 invokeHumanPlay(position, computerView.getChildAt(position));
                 checkWinning(controller.getComputerBoard().getShipCount(), win);
+                this.service.unregisterListener();
                 invokeComputerPlay();
             }
         });
@@ -121,7 +167,7 @@ public class BoardsActivity extends AppCompatActivity {
     }
 
     private void invokeComputerPlay() {
-        new Thread(()-> {
+        new Thread(() -> {
             int position = controller.computerPlay();
             runOnUiThread(() -> {
                 animationHandler.toggleProgressBarInvisible();
@@ -132,7 +178,14 @@ public class BoardsActivity extends AppCompatActivity {
             });
         }).start();
 
-        handler.postDelayed(() -> checkWinning(controller.getHumanBoard().getShipCount(), lose), 4500);
+        handler.postDelayed(() -> {
+            checkWinning(controller.getHumanBoard().getShipCount(), lose);
+        }, COMPUTER_DELAY);
+
+        handler.postDelayed(() -> this.service.registerListener(this),
+                COMPUTER_DELAY
+                        + AnimationHandler.DURATION
+                        + AnimationHandler.DELAY);
     }
 
     private void checkWinning(int shipCount, int status) {
@@ -145,7 +198,7 @@ public class BoardsActivity extends AppCompatActivity {
         }
     }
 
-    public void onTest(View view) {
+    public void onAcceleration() {
         controller.getHumanBoard().replaceShips(true);
         controller.getHumanBoard().hitRandomShips();
         ((TileAdapter) humanView.getAdapter()).notifyDataSetChanged();
