@@ -56,6 +56,11 @@ public class Board {
     private ArrayList<Ship> destroyedShips;
 
     /**
+     * Saves the last tile marked status
+     */
+    private TileState lastTileState;
+
+    /**
      * This class represents a board in the game. </br>
      * Given a difficulty, the class initializes a Tile[] array according to the difficulties aspects. </br>
      * It than changes the status of the tiles to visible or invisible according to the visibility parameter
@@ -172,8 +177,10 @@ public class Board {
         if (theBoard[tile].isNotAlreadyChosen()) {
             if (theBoard[tile].isEmpty()) {
                 theBoard[tile].setState(TileState.MISS);
+                lastTileState = TileState.MISS;
             } else {
                 theBoard[tile].setState(TileState.HIT);
+                lastTileState = TileState.HIT;
                 Ship shipInTile = getShipInTile(tile);
                 shipInTile.setPartsLeft(shipInTile.getPartsLeft() - 1);
                 if (shipInTile.isDestroyed()) {
@@ -220,6 +227,8 @@ public class Board {
     ArrayList<Ship> getDestroyedShips() {
         return destroyedShips;
     }
+
+    public TileState getLastTileState() { return lastTileState; }
 }
 
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,8 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
     private Bundle anotherBundle;
     private Intent intent;
     private OrientationsSensorService service;
+    private MediaPlayer bombSound;
+    private MediaPlayer splashSound;
 
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
@@ -64,6 +67,9 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
         init();
         initBundles();
         registerListeners();
+
+        this.bombSound = MediaPlayer.create(this, R.raw.bomb_sound);
+        this.splashSound = MediaPlayer.create(this, R.raw.water_splash);
     }
 
     @Override
@@ -155,10 +161,18 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
         });
     }
 
+    private void makeSound(TileState lastTileState) {
+        if(lastTileState == TileState.HIT)
+            bombSound.start();
+        else
+            splashSound.start();
+    }
+
     private void invokeHumanPlay(int position, View view) {
         TileView v = (TileView) view;
         v.getImage().getBackground();
         if (controller.humanPlay(position)) {
+            makeSound(controller.getComputerBoard().getLastTileState());
             TileState t = controller.getComputerBoard().getTile(position).getState();
             animationHandler.animateTileOf(computerView, t, view);
             refreshShipAmount(computersShipsLeft, controller.getComputerBoard().getShipAmounts());
@@ -169,6 +183,7 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
     private void invokeComputerPlay() {
         new Thread(() -> {
             int position = controller.computerPlay();
+            makeSound(controller.getHumanBoard().getLastTileState());
             runOnUiThread(() -> {
                 animationHandler.toggleProgressBarInvisible();
                 TileState t = controller.getHumanBoard().getTile(position).getState();

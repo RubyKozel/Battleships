@@ -1,6 +1,7 @@
 package com.example.kozel.battleship;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -17,6 +18,7 @@ public class TileAdapter extends BaseAdapter {
     private int size;
     private int height;
     private int width;
+
 
     TileAdapter(Context context, Board board, int height, int width) {
         this.board = board;
@@ -65,8 +67,9 @@ public class TileAdapter extends BaseAdapter {
             tileView.getImage().setImageResource(0);
             tileView.getImage().setBackgroundResource(R.drawable.border);
         } else {
-            if(state == TileState.HIT || state == TileState.DESTROYED)
+            if(state == TileState.HIT || state == TileState.DESTROYED) {
                 tileView.getImage().setBackgroundResource(R.drawable.gridview_bg);
+            }
             tileView.getImage().setImageResource(src);
         }
         return tileView;
