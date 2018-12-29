@@ -3,6 +3,7 @@ package com.example.kozel.battleship;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import com.example.kozel.battleship.Logic.Difficulty;
 
@@ -17,10 +18,16 @@ public class MainActivity extends AppCompatActivity implements
     public final static String DIFFICULTY_KEY = "DIFFICULTY";
     public final static String BUNDLE_KEY = "BUNDLE";
 
+    DatabaseHelper myDB;
+    ImageButton btnScore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        myDB=new DatabaseHelper(this);
+
+        btnScore=(ImageButton)findViewById(R.id.high_scores);
 
         getSupportFragmentManager()
                 .beginTransaction()
