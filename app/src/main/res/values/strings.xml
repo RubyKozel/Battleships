@@ -13,4 +13,5 @@
     <string name="main_menu">main menu</string>
     <string name="replay">replay</string>
     <string name="highscore_button">High Scores</string>
+    <string name="user_name">Username</string>
 </resources>

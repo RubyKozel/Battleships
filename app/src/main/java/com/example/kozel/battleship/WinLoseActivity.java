@@ -1,9 +1,15 @@
 package com.example.kozel.battleship;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.InputType;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.kozel.battleship.Logic.Difficulty;
@@ -13,11 +19,13 @@ public class WinLoseActivity extends AppCompatActivity {
 
     private ImageView status_game;
     private int status;
+    private int clicks;
     private Difficulty difficulty;
 
     private Bundle b2;
     private Intent intent1;
     private Intent intent2;
+    private String m_Text = "";
 
     public final static String DIFFICULTY_KEY = "DIFFICULTY";
     public final static String PLAY_KEY = "PLAY_KEY";
@@ -37,6 +45,26 @@ public class WinLoseActivity extends AppCompatActivity {
         if (b != null) {
             difficulty = Difficulty.values()[b.getInt(MainActivity.DIFFICULTY_KEY)];
             status = b.getInt(BoardsActivity.WIN_LOSE_KEY);
+        }
+
+        if(status==BoardsActivity.win)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("You won! Please enter your name:");
+            View viewInflated = LayoutInflater.from(this).inflate(R.layout.activity_main,(ViewGroup) findViewById(android.R.id.content), false);
+            final EditText input = (EditText) viewInflated.findViewById(R.id.user_name);
+            builder.setView(viewInflated);
+
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    m_Text = input.getText().toString();
+                }
+            });
+
+            builder.show();
+            clicks=b.getInt(BoardsActivity.CLICKS__KEY);
         }
 
         status_game = findViewById(R.id.status_game);

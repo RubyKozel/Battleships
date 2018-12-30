@@ -52,12 +52,13 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
     };
 
     public final static String WIN_LOSE_KEY = "WIN_LOSE";
+    public final static String CLICKS__KEY = "CLICKS";
     public final static String DIFFICULTY_KEY = "DIFFICULTY";
     public final static String BUNDLE_KEY = "BUNDLE";
     public final static int win = R.drawable.you_win;
     public final static int lose = R.drawable.game_over;
     public final static int COMPUTER_DELAY = 4500;
-
+    public int count_clicks=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,6 +173,7 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
         TileView v = (TileView) view;
         v.getImage().getBackground();
         if (controller.humanPlay(position)) {
+            count_clicks++;
             makeSound(controller.getComputerBoard().getLastTileState());
             TileState t = controller.getComputerBoard().getTile(position).getState();
             animationHandler.animateTileOf(computerView, t, view);
@@ -206,6 +208,7 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
     private void checkWinning(int shipCount, int status) {
         if (controller.checkIfSomeoneWon(shipCount)) {
             anotherBundle.putInt(WIN_LOSE_KEY, status);
+            anotherBundle.putInt(CLICKS__KEY,get_count_clicks());
             anotherBundle.putInt(DIFFICULTY_KEY, difficulty.ordinal());
             intent.putExtra(BUNDLE_KEY, anotherBundle);
             startActivity(intent);
@@ -225,5 +228,10 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
         for (int i = 0; i < count; i++) {
             ((TextView) shipsLeft.getChildAt(i)).setText(getResources().getString(R.string.sized, shipAmounts[count - i - 1]));
         }
+    }
+
+    public int get_count_clicks()
+    {
+        return count_clicks;
     }
 }
