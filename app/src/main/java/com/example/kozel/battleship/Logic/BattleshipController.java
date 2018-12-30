@@ -22,17 +22,14 @@ public class BattleshipController {
         human.setTurn(true);
     }
 
-    private void switchTurn() {
+    public void switchTurn() {
         human.setTurn(!human.isTurn());
         computer.setTurn(!computer.isTurn());
     }
 
     public boolean humanPlay(int position) {
         if (human.isTurn()) {
-            if (computerBoard.markTile(position)) {
-                switchTurn();
-                return true;
-            }
+            return computerBoard.markTile(position);
         }
         return false;
     }

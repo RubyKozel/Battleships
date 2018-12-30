@@ -18,14 +18,14 @@ public class MainActivity extends AppCompatActivity implements
     public final static String DIFFICULTY_KEY = "DIFFICULTY";
     public final static String BUNDLE_KEY = "BUNDLE";
 
-    DatabaseHelper myDB;
-    ImageButton btnScore;
+    //DatabaseHelper myDB;
+    //ImageButton btnScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myDB=new DatabaseHelper(this);
+        //myDB=new DatabaseHelper(this);
 
         //btnScore=(ImageButton)findViewById(R.id.high_scores);
 

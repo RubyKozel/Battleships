@@ -7,6 +7,12 @@
     android:background="@drawable/boards_bg"
     tools:context=".WinLoseActivity">
 
+    <FrameLayout
+        android:id="@+id/prompt_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3" />
+
     <ImageButton
         android:id="@+id/play_again"
         android:layout_width="150dp"
@@ -33,6 +39,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:contentDescription="@string/replay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.405"
@@ -40,7 +47,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.135" />
 
-    <EditText
+    <!--<EditText
         android:id="@+id/user_name"
         android:layout_width="217dp"
         android:layout_height="wrap_content"
@@ -49,13 +56,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:inputType="phone"
+        android:hint="@string/user_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.601"/>
+        app:layout_constraintVertical_bias="0.601"/>-->
 
     <ImageButton
         android:id="@+id/main_menu"

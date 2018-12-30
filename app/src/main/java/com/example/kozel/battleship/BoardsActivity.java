@@ -154,10 +154,14 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
 
         computerView.setOnItemClickListener((parent, view, position, id) -> {
             if (controller.getHuman().isTurn()) {
-                invokeHumanPlay(position, computerView.getChildAt(position));
-                checkWinning(controller.getComputerBoard().getShipCount(), win);
-                this.service.unregisterListener();
-                invokeComputerPlay();
+                if(invokeHumanPlay(position, computerView.getChildAt(position))){
+                    if(!checkWinning(controller.getComputerBoard().getShipCount(), win))
+                        controller.switchTurn();
+                }
+                if(!controller.getHuman().isTurn()){
+                    this.service.unregisterListener();
+                    invokeComputerPlay();
+                }
             }
         });
     }
@@ -169,7 +173,7 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
             splashSound.start();
     }
 
-    private void invokeHumanPlay(int position, View view) {
+    private boolean invokeHumanPlay(int position, View view) {
         TileView v = (TileView) view;
         v.getImage().getBackground();
         if (controller.humanPlay(position)) {
@@ -179,12 +183,16 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
             animationHandler.animateTileOf(computerView, t, view);
             refreshShipAmount(computersShipsLeft, controller.getComputerBoard().getShipAmounts());
             animationHandler.toggleHumanVisibility();
+            return true;
         }
+        return false;
     }
 
     private void invokeComputerPlay() {
         new Thread(() -> {
             int position = controller.computerPlay();
+            if(position == -1)
+                return;
             makeSound(controller.getHumanBoard().getLastTileState());
             runOnUiThread(() -> {
                 animationHandler.toggleProgressBarInvisible();
@@ -205,7 +213,7 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
                         + AnimationHandler.DELAY);
     }
 
-    private void checkWinning(int shipCount, int status) {
+    private boolean checkWinning(int shipCount, int status) {
         if (controller.checkIfSomeoneWon(shipCount)) {
             anotherBundle.putInt(WIN_LOSE_KEY, status);
             anotherBundle.putInt(CLICKS__KEY,get_count_clicks());
@@ -213,7 +221,9 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
             intent.putExtra(BUNDLE_KEY, anotherBundle);
             startActivity(intent);
             finish();
+            return true;
         }
+        return false;
     }
 
     public void onAcceleration() {
