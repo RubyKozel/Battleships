@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.GridView;
@@ -203,9 +202,7 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
             });
         }).start();
 
-        handler.postDelayed(() -> {
-            checkWinning(controller.getHumanBoard().getShipCount(), lose);
-        }, COMPUTER_DELAY);
+        handler.postDelayed(() -> checkWinning(controller.getHumanBoard().getShipCount(), lose), COMPUTER_DELAY);
 
         handler.postDelayed(() -> this.service.registerListener(this),
                 COMPUTER_DELAY

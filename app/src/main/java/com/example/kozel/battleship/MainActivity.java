@@ -119,16 +119,28 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onButtonEasyHighScore() {
-
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new HighScoreTable())
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
     public void onButtonMediumHighScore() {
-
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new HighScoreTable())
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
     public void onButtonHardHighScore() {
-
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new HighScoreTable())
+                .addToBackStack(null)
+                .commit();
     }
 }

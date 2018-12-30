@@ -1,0 +1,327 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/start_bg"
+    tools:context="com.example.kozel.battleship.HighScoresFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableLayout
+            android:layout_width="257dp"
+            android:layout_height="448dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:stretchColumns="0,1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/name_label"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="NAME"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/score_label"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="SCORE"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/name_1"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="NAME"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/score_1"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="SCORE"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/name_2"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="NAME"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/score_2"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="SCORE"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/name_3"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="NAME"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/score_3"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="SCORE"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/name_4"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="NAME"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/score_4"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="SCORE"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/name_5"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="NAME"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/score_5"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="SCORE"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/name_6"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="NAME"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/score_6"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="SCORE"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/name_7"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="NAME"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/score_7"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="SCORE"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/name_8"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="NAME"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/score_8"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="SCORE"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/name_9"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="NAME"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/score_9"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="SCORE"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/name_10"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="NAME"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/score_10"
+                    android:layout_width="84dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:background="@drawable/border"
+                    android:text="SCORE"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="normal" />
+            </TableRow>
+        </TableLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>
