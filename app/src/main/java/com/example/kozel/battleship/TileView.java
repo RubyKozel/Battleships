@@ -1,6 +1,5 @@
 package com.example.kozel.battleship;
 
-
 import android.content.Context;
 import android.widget.ImageView;
 import android.widget.LinearLayout;

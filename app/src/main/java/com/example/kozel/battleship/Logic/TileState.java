@@ -2,7 +2,6 @@ package com.example.kozel.battleship.Logic;
 
 import com.example.kozel.battleship.R;
 
-
 public enum TileState {
     HIT, MISS, INVISIBLE, VISIBLE, DESTROYED;
 

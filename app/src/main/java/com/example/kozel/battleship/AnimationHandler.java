@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 import com.example.kozel.battleship.Logic.TileState;
 
-
-
 class AnimationHandler {
     private Handler handler;
     private GridView humanView;

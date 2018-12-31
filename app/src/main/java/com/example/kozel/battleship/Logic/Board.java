@@ -1,11 +1,8 @@
 package com.example.kozel.battleship.Logic;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 public class Board {
 
