@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new AppStartFragment())
-                .addToBackStack(null)
+                //.addToBackStack(null)
                 .commit();
 
         intent = new Intent(MainActivity.this, BoardsActivity.class);

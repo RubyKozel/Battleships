@@ -1,5 +1,7 @@
 package com.example.kozel.battleship.Logic;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -210,6 +212,7 @@ public class Board {
     }
 
     public int getShipCount() {
+        Log.d("SHIP COUNT", shipCount + "");
         return shipCount;
     }
 

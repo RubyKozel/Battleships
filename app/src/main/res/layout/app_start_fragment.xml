@@ -33,7 +33,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/start_game_btn"
+            android:background="@drawable/high_scores"
             android:contentDescription="@string/highscore_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

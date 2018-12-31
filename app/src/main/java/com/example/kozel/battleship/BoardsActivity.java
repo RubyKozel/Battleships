@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
@@ -188,32 +189,13 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
     }
 
     private void invokeComputerPlay() {
-        new Thread(() -> {
-            int position = controller.computerPlay();
-            if(position == -1)
-                return;
-            makeSound(controller.getHumanBoard().getLastTileState());
-            runOnUiThread(() -> {
-                animationHandler.toggleProgressBarInvisible();
-                TileState t = controller.getHumanBoard().getTile(position).getState();
-                animationHandler.animateTileOf(humanView, t, humanView.getChildAt(position));
-                refreshShipAmount(humanShipsLeft, controller.getHumanBoard().getShipAmounts());
-                animationHandler.toggleComputerVisibility();
-            });
-        }).start();
-
-        handler.postDelayed(() -> checkWinning(controller.getHumanBoard().getShipCount(), lose), COMPUTER_DELAY);
-
-        handler.postDelayed(() -> this.service.registerListener(this),
-                COMPUTER_DELAY
-                        + AnimationHandler.DURATION
-                        + AnimationHandler.DELAY);
+        new ComputerTask().execute();
     }
 
     private boolean checkWinning(int shipCount, int status) {
         if (controller.checkIfSomeoneWon(shipCount)) {
             anotherBundle.putInt(WIN_LOSE_KEY, status);
-            anotherBundle.putInt(CLICKS__KEY,get_count_clicks());
+            anotherBundle.putInt(CLICKS__KEY, get_count_clicks());
             anotherBundle.putInt(DIFFICULTY_KEY, difficulty.ordinal());
             intent.putExtra(BUNDLE_KEY, anotherBundle);
             startActivity(intent);
@@ -240,5 +222,32 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
     public int get_count_clicks()
     {
         return count_clicks;
+    }
+
+    private class ComputerTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            int position = controller.computerPlay();
+            if(position != -1){
+                makeSound(controller.getHumanBoard().getLastTileState());
+                runOnUiThread(() -> {
+                    animationHandler.toggleProgressBarInvisible();
+                    TileState t = controller.getHumanBoard().getTile(position).getState();
+                    animationHandler.animateTileOf(humanView, t, humanView.getChildAt(position));
+                    refreshShipAmount(humanShipsLeft, controller.getHumanBoard().getShipAmounts());
+                    animationHandler.toggleComputerVisibility();
+                });
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            checkWinning(controller.getHumanBoard().getShipCount(), lose);
+            handler.postDelayed(() -> BoardsActivity.this.service.registerListener(BoardsActivity.this),
+                            AnimationHandler.DURATION + AnimationHandler.DELAY);
+        }
     }
 }

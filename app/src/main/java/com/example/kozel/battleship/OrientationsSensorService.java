@@ -27,6 +27,7 @@ public class OrientationsSensorService extends Service implements SensorEventLis
         mBinder = new LocalBinder();
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         Sensor s = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        Log.d("SENSOR", s + "");
         if (s != null) {
             mSensor = s;
         } else {
