@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new AppStartFragment())
-                //.addToBackStack(null)
                 .commit();
 
         intent = new Intent(MainActivity.this, BoardsActivity.class);
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements
                 .apply();
 
         startActivity(intent);
-        finish();
     }
 
     @Override
@@ -63,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements
                 .apply();
 
         startActivity(intent);
-        finish();
     }
 
     @Override
@@ -77,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements
                 .apply();
 
         startActivity(intent);
-        finish();
     }
 
     @Override
@@ -98,12 +94,7 @@ public class MainActivity extends AppCompatActivity implements
                 default:
                     break;
             }
-        } else
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new ChooseDifficultyFragment())
-                    .addToBackStack(null)
-                    .commit();
+        }
     }
 
     @Override
@@ -111,6 +102,15 @@ public class MainActivity extends AppCompatActivity implements
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new HighScoresFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void onButtonChooseDifficulty() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new ChooseDifficultyFragment())
                 .addToBackStack(null)
                 .commit();
     }
