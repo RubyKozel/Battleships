@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,8 +61,10 @@ public class HighScoreTable extends Fragment {
                 Log.d("TAG", "" + (TextView) view.findViewById(NAME_ID_ARRAY[i]));
                 Log.d("TAG", "" + (TextView) view.findViewById(SCORE_ID_ARRAY[i]));
                 ((TextView) view.findViewById(NAME_ID_ARRAY[i])).setText(cur.getString(cur.getColumnIndex(DatabaseHelper.KEY_NAME)));
+                ((TextView) view.findViewById(NAME_ID_ARRAY[i])).setGravity(Gravity.CENTER);
                 ((TextView) view.findViewById(SCORE_ID_ARRAY[i])).setText(
                         String.format(Locale.ENGLISH,"%d", cur.getInt(cur.getColumnIndex(DatabaseHelper.KEY_SCORE))));
+                ((TextView) view.findViewById(SCORE_ID_ARRAY[i])).setGravity(Gravity.CENTER);
                 i++;
             }
         }
