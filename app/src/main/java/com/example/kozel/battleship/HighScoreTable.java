@@ -2,7 +2,6 @@ package com.example.kozel.battleship;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -51,10 +50,9 @@ public class HighScoreTable extends Fragment {
         int i = 0;
         if (cur != null && cur.getCount() > 0) {
             while(cur.moveToNext()){
-                ((TextView) view.findViewById(NAME_ID_ARRAY[0])).setText(cur.getString(0));
-                ((TextView) view.findViewById(SCORE_ID_ARRAY[0])).setText(cur.getInt(0));
+                ((TextView) view.findViewById(NAME_ID_ARRAY[i])).setText(cur.getString(i));
+                ((TextView) view.findViewById(SCORE_ID_ARRAY[i])).setText(cur.getInt(i));
             }
-
         }
 
         return view;
