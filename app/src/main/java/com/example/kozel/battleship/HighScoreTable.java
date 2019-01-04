@@ -52,6 +52,7 @@ public class HighScoreTable extends Fragment {
             while(cur.moveToNext()){
                 ((TextView) view.findViewById(NAME_ID_ARRAY[i])).setText(cur.getString(i));
                 ((TextView) view.findViewById(SCORE_ID_ARRAY[i])).setText(cur.getInt(i));
+                i++;
             }
         }
 
