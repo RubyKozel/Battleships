@@ -5,15 +5,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DB_VERSION = 1;
     private static final String DATABASE_NAME = "HighScores.db";
     private static final String TABLE_HIGH_SCORES = "HighScores_table";
-    private static final String KEY_NAME = "NAME";
-    private static final String KEY_SCORE = "SCORE";
-    private static final String KEY_DIFFICULTY = "DIFFICULTY";
+    public static final String KEY_NAME = "NAME";
+    public static final String KEY_SCORE = "SCORE";
+    public static final String KEY_DIFFICULTY = "DIFFICULTY";
 
     private static DatabaseHelper instance = null;
 
@@ -52,10 +53,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_HIGH_SCORES, null, contentValues);
     }
 
-    Cursor getAllData(int difficulty) {
+    Cursor getAllData(String difficulty) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_HIGH_SCORES +
-                                    " WHERE " + KEY_DIFFICULTY + " = " + difficulty +
+                                    " WHERE " + KEY_DIFFICULTY + " = " + "\'" + difficulty + "\'" +
                                     " ORDER BY " + KEY_SCORE +
                                     " LIMIT 10" , null);
     }

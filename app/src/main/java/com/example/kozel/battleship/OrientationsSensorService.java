@@ -31,7 +31,7 @@ public class OrientationsSensorService extends Service implements SensorEventLis
         if (s != null) {
             mSensor = s;
         } else {
-            throw new RuntimeException("No Sensor Available");
+           // throw new RuntimeException("No Sensor Available");
         }
     }
 

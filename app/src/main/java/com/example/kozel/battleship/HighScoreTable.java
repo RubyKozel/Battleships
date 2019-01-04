@@ -6,6 +6,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,9 @@ public class HighScoreTable extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        myDb = DatabaseHelper.getInstance(getContext());
+
         int[] SCORE_ID_ARRAY = new int[]{
                 R.id.score_1,
                 R.id.score_2,
@@ -46,15 +50,15 @@ public class HighScoreTable extends Fragment {
                 R.id.name_10
         };
 
-        Cursor cur = myDb.getAllData(this.getArguments().getInt(MainActivity.DIFFICULTY_KEY));
+        Cursor cur = myDb.getAllData(this.getArguments().getString(MainActivity.DIFFICULTY_KEY));
         View view = inflater.inflate(R.layout.highscore, container, false);
         int i = 0;
         if (cur != null && cur.getCount() > 0) {
             while(cur.moveToNext()){
-                ((TextView) view.findViewById(NAME_ID_ARRAY[0])).setText(cur.getString(0));
-                ((TextView) view.findViewById(SCORE_ID_ARRAY[0])).setText(cur.getInt(0));
+                ((TextView) view.findViewById(NAME_ID_ARRAY[i])).setText(cur.getString(cur.getColumnIndex(DatabaseHelper.KEY_NAME)));
+                ((TextView) view.findViewById(SCORE_ID_ARRAY[i])).setText(cur.getInt(cur.getColumnIndex(DatabaseHelper.KEY_SCORE)));
+                i++;
             }
-
         }
 
         return view;

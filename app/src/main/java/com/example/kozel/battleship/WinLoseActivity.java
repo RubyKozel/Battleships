@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+
 import com.example.kozel.battleship.Logic.Difficulty;
 
 public class WinLoseActivity extends AppCompatActivity {
@@ -45,19 +46,19 @@ public class WinLoseActivity extends AppCompatActivity {
         if (status == BoardsActivity.win) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("You won! Please enter your name:");
-            View viewInflated = LayoutInflater.from(this).inflate(R.layout.prompt,(ViewGroup)findViewById(R.id.prompt_container),false);
+            View viewInflated = LayoutInflater.from(this).inflate(R.layout.prompt, (ViewGroup) findViewById(R.id.prompt_container), false);
             final EditText input = (EditText) viewInflated.findViewById(R.id.user_name);
             builder.setView(viewInflated);
 
             builder.setPositiveButton(android.R.string.ok, (dialog, which) -> {
                 dialog.dismiss();
                 m_Text = input.getText().toString();
-                Log.d("THIS IS TEXT", m_Text);
+                clicks = b.getInt(BoardsActivity.CLICKS__KEY);
+                DatabaseHelper.getInstance(getBaseContext()).insertData(m_Text, clicks, Difficulty.values()[b.getInt(MainActivity.DIFFICULTY_KEY)].name());
             });
 
             builder.show();
-            clicks = b.getInt(BoardsActivity.CLICKS__KEY);
-            DatabaseHelper.getInstance(getBaseContext()).insertData(m_Text,clicks,Difficulty.values()[b.getInt(MainActivity.DIFFICULTY_KEY)].name());
+
         }
 
         status_game = findViewById(R.id.status_game);

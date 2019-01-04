@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onButtonEasyHighScore() {
         HighScoreTable highScoreTable = new HighScoreTable();
         Bundle args = new Bundle();
-        args.putInt(DIFFICULTY_KEY, Difficulty.EASY.ordinal());
+        args.putString(DIFFICULTY_KEY, Difficulty.EASY.name());
         highScoreTable.setArguments(args);
 
         getSupportFragmentManager()
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onButtonMediumHighScore() {
         HighScoreTable highScoreTable = new HighScoreTable();
         Bundle args = new Bundle();
-        args.putInt(DIFFICULTY_KEY, Difficulty.MEDIUM.ordinal());
+        args.putString(DIFFICULTY_KEY, Difficulty.MEDIUM.name());
         highScoreTable.setArguments(args);
 
         getSupportFragmentManager()
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onButtonHardHighScore() {
         HighScoreTable highScoreTable = new HighScoreTable();
         Bundle args = new Bundle();
-        args.putInt(DIFFICULTY_KEY, Difficulty.HARD.ordinal());
+        args.putString(DIFFICULTY_KEY, Difficulty.HARD.name());
         highScoreTable.setArguments(args);
 
         getSupportFragmentManager()
