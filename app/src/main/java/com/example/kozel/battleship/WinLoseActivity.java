@@ -10,9 +10,7 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-
 import com.example.kozel.battleship.Logic.Difficulty;
-
 
 public class WinLoseActivity extends AppCompatActivity {
 
@@ -20,12 +18,10 @@ public class WinLoseActivity extends AppCompatActivity {
     private int status;
     private int clicks;
     private Difficulty difficulty;
-
     private Bundle b2;
     private Intent intent1;
     private Intent intent2;
     private String m_Text = "";
-
     public final static String DIFFICULTY_KEY = "DIFFICULTY";
     public final static String PLAY_KEY = "PLAY_KEY";
     public final static String BUNDLE_KEY = "BUNDLE";
@@ -61,8 +57,7 @@ public class WinLoseActivity extends AppCompatActivity {
 
             builder.show();
             clicks = b.getInt(BoardsActivity.CLICKS__KEY);
-
-
+            DatabaseHelper.getInstance(getBaseContext()).insertData(m_Text,clicks);
         }
 
         status_game = findViewById(R.id.status_game);

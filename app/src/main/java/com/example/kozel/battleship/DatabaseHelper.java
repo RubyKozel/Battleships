@@ -13,9 +13,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_NAME = "NAME";
     private static final String KEY_SCORE = "SCORE";
 
-    public DatabaseHelper(Context context) {
+    private static DatabaseHelper instance= null;
+
+    private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
         SQLiteDatabase db = this.getWritableDatabase();
+    }
+
+    public static DatabaseHelper getInstance(Context context){
+     if (instance==null)
+         instance=new DatabaseHelper(context);
+     return instance;
     }
 
     @Override
@@ -33,14 +41,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String score) {
+    public void insertData(String name,int score) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(KEY_NAME, name);
         contentValues.put(KEY_SCORE, score);
-        long result = db.insert(TABLE_HIGH_SCORES, null, contentValues);
-        if (result == -1)
-            return false;
-        else
-            return true;
+        db.insert(TABLE_HIGH_SCORES, null, contentValues);
     }
 }

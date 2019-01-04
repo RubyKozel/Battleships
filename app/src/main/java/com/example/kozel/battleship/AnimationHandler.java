@@ -10,7 +10,6 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.example.kozel.battleship.Logic.TileState;
 
 class AnimationHandler {

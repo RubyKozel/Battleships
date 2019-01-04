@@ -16,7 +16,6 @@ import android.view.ViewTreeObserver;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.example.kozel.battleship.Logic.BattleshipController;
 import com.example.kozel.battleship.Logic.Difficulty;
 import com.example.kozel.battleship.Logic.TileState;

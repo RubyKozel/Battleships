@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-
 import com.example.kozel.battleship.Logic.Board;
 import com.example.kozel.battleship.Logic.TileState;
 

@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.kozel.battleship.MainActivity.DIFFICULTY_KEY;
 
