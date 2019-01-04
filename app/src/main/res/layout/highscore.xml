@@ -35,7 +35,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="NAME"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -46,7 +46,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="SCORE"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -62,7 +62,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="NAME"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -73,7 +73,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="SCORE"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -89,7 +89,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="NAME"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -100,7 +100,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="SCORE"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -116,7 +116,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="NAME"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -127,7 +127,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="SCORE"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -143,7 +143,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="NAME"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -154,7 +154,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="SCORE"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -170,7 +170,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="NAME"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -181,7 +181,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="SCORE"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -197,7 +197,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="NAME"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -208,7 +208,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="SCORE"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -224,7 +224,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="NAME"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -235,7 +235,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="SCORE"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -251,7 +251,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="NAME"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -262,7 +262,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="SCORE"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -278,7 +278,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="NAME"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -289,7 +289,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="SCORE"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -305,7 +305,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="NAME"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -316,7 +316,7 @@
                     android:layout_height="match_parent"
                     android:layout_column="0"
                     android:background="@drawable/border"
-                    android:text="SCORE"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="30sp"
                     android:textStyle="normal" />

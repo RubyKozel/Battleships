@@ -22,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
     }
 
-    public static DatabaseHelper getInstance(Context context) {
+    static DatabaseHelper getInstance(Context context) {
         if (instance == null)
             instance = new DatabaseHelper(context);
         return instance;
@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertData(String name, int score, String difficulty) {
+    void insertData(String name, int score, String difficulty) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_NAME, name);
@@ -52,9 +52,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_HIGH_SCORES, null, contentValues);
     }
 
-    public Cursor getAllData() {
+    Cursor getAllData(int difficulty) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from " + TABLE_HIGH_SCORES + " ORDER BY " + KEY_SCORE + " LIMIT 10" , null);
-        return res;
+        return db.rawQuery("SELECT * FROM " + TABLE_HIGH_SCORES +
+                                    " WHERE " + KEY_DIFFICULTY + " = " + difficulty +
+                                    " ORDER BY " + KEY_SCORE +
+                                    " LIMIT 10" , null);
     }
 }

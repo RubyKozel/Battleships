@@ -46,7 +46,7 @@ public class HighScoreTable extends Fragment {
                 R.id.name_10
         };
 
-        Cursor cur = myDb.getAllData();
+        Cursor cur = myDb.getAllData(this.getArguments().getInt(MainActivity.DIFFICULTY_KEY));
         View view = inflater.inflate(R.layout.highscore, container, false);
         int i = 0;
         if (cur != null && cur.getCount() > 0) {

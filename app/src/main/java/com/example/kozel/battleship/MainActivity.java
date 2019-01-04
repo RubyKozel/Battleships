@@ -108,27 +108,42 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onButtonEasyHighScore() {
+        HighScoreTable highScoreTable = new HighScoreTable();
+        Bundle args = new Bundle();
+        args.putInt(DIFFICULTY_KEY, Difficulty.EASY.ordinal());
+        highScoreTable.setArguments(args);
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, new HighScoreTable())
+                .replace(R.id.fragment_container, highScoreTable)
                 .addToBackStack(null)
                 .commit();
     }
 
     @Override
     public void onButtonMediumHighScore() {
+        HighScoreTable highScoreTable = new HighScoreTable();
+        Bundle args = new Bundle();
+        args.putInt(DIFFICULTY_KEY, Difficulty.MEDIUM.ordinal());
+        highScoreTable.setArguments(args);
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, new HighScoreTable())
+                .replace(R.id.fragment_container, highScoreTable)
                 .addToBackStack(null)
                 .commit();
     }
 
     @Override
     public void onButtonHardHighScore() {
+        HighScoreTable highScoreTable = new HighScoreTable();
+        Bundle args = new Bundle();
+        args.putInt(DIFFICULTY_KEY, Difficulty.HARD.ordinal());
+        highScoreTable.setArguments(args);
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, new HighScoreTable())
+                .replace(R.id.fragment_container, highScoreTable)
                 .addToBackStack(null)
                 .commit();
     }
