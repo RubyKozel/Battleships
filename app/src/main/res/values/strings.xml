@@ -14,4 +14,6 @@
     <string name="replay">replay</string>
     <string name="highscore_button">High Scores</string>
     <string name="user_name">Username</string>
+    <string name="name_col">Name</string>
+    <string name="score_col">Score</string>
 </resources>

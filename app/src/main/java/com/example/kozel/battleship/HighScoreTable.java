@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Locale;
+
 public class HighScoreTable extends Fragment {
 
     DatabaseHelper myDb;
@@ -55,8 +57,11 @@ public class HighScoreTable extends Fragment {
         int i = 0;
         if (cur != null && cur.getCount() > 0) {
             while(cur.moveToNext()){
+                Log.d("TAG", "" + (TextView) view.findViewById(NAME_ID_ARRAY[i]));
+                Log.d("TAG", "" + (TextView) view.findViewById(SCORE_ID_ARRAY[i]));
                 ((TextView) view.findViewById(NAME_ID_ARRAY[i])).setText(cur.getString(cur.getColumnIndex(DatabaseHelper.KEY_NAME)));
-                ((TextView) view.findViewById(SCORE_ID_ARRAY[i])).setText(cur.getInt(cur.getColumnIndex(DatabaseHelper.KEY_SCORE)));
+                ((TextView) view.findViewById(SCORE_ID_ARRAY[i])).setText(
+                        String.format(Locale.ENGLISH,"%d", cur.getInt(cur.getColumnIndex(DatabaseHelper.KEY_SCORE))));
                 i++;
             }
         }
