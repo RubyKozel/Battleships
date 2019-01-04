@@ -12,28 +12,19 @@ public class MainActivity extends AppCompatActivity implements
 
     private Bundle b;
     private Intent intent;
-
     public final static String DIFFICULTY_KEY = "DIFFICULTY";
     public final static String BUNDLE_KEY = "BUNDLE";
-
-    //DatabaseHelper myDB;
-    //ImageButton btnScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //myDB=new DatabaseHelper(this);
-
-        //btnScore=(ImageButton)findViewById(R.id.high_scores);
-
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new AppStartFragment())
                 .commit();
 
         intent = new Intent(MainActivity.this, BoardsActivity.class);
-
         b = new Bundle();
     }
 

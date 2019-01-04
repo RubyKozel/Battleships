@@ -57,7 +57,7 @@ public class WinLoseActivity extends AppCompatActivity {
 
             builder.show();
             clicks = b.getInt(BoardsActivity.CLICKS__KEY);
-            DatabaseHelper.getInstance(getBaseContext()).insertData(m_Text,clicks);
+            DatabaseHelper.getInstance(getBaseContext()).insertData(m_Text,clicks,Difficulty.values()[b.getInt(MainActivity.DIFFICULTY_KEY)].name());
         }
 
         status_game = findViewById(R.id.status_game);
