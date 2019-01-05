@@ -34,7 +34,6 @@ public class WinLoseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_win_lose);
         myDb = DatabaseHelper.getInstance(getApplicationContext());
-        Cursor cur = myDb.getAllData(difficulty.name());
 
         intent1 = new Intent(WinLoseActivity.this, MainActivity.class);
         intent2 = new Intent(WinLoseActivity.this, BoardsActivity.class);
@@ -48,6 +47,7 @@ public class WinLoseActivity extends AppCompatActivity {
         }
 
         clicks = b.getInt(BoardsActivity.CLICKS__KEY);
+        Cursor cur = myDb.getAllData(difficulty.name());
 
         if (status == BoardsActivity.win) {
             if (cur.getCount() >= 10) {
