@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String CREATE_HIGH_SCORES_TABLE = "create table  " + TABLE_HIGH_SCORES + "("
-                + ID + "INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                + ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
                 + KEY_NAME + " TEXT,"
                 + KEY_SCORE + " INTEGER,"
                 + KEY_DIFFICULTY + " STRING" + ")";
