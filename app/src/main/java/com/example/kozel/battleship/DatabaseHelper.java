@@ -11,9 +11,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private static final String DATABASE_NAME = "HighScores.db";
     private static final String TABLE_HIGH_SCORES = "HighScores_table";
-    public static final String KEY_NAME = "NAME";
-    public static final String KEY_SCORE = "SCORE";
-    public static final String KEY_DIFFICULTY = "DIFFICULTY";
+    private static final String ID = "ID";
+            static final String KEY_NAME = "NAME";
+            static final String KEY_SCORE = "SCORE";
+    private static final String KEY_DIFFICULTY = "DIFFICULTY";
 
     private static DatabaseHelper instance = null;
 
@@ -31,7 +32,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String CREATE_HIGH_SCORES_TABLE = "create table  " + TABLE_HIGH_SCORES + "("
-                + KEY_NAME + " TEXT PRIMARY KEY," + KEY_SCORE + " INTEGER," + KEY_DIFFICULTY + " STRING" + ")";
+                + ID + "INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                + KEY_NAME + " TEXT,"
+                + KEY_SCORE + " INTEGER,"
+                + KEY_DIFFICULTY + " STRING" + ")";
 
         db.execSQL(CREATE_HIGH_SCORES_TABLE);
     }

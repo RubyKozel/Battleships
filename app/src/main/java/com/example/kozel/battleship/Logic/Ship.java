@@ -54,7 +54,7 @@ class Ship {
         return size;
     }
 
-    public int[] getShipPlacement() {
+    int[] getShipPlacement() {
         return shipPlacement;
     }
 }
