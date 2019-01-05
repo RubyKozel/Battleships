@@ -1,7 +1,5 @@
 package com.example.kozel.battleship.Logic;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -211,16 +209,13 @@ public class Board {
         return boardSize;
     }
 
-    public int getShipCount() {
-        Log.d("SHIP COUNT", shipCount + "");
-        return shipCount;
-    }
+    public int getShipCount() { return shipCount; }
 
     public int[] getShipAmounts() {
         return shipAmounts;
     }
 
-    public ArrayList<Integer> getNotChosenTiles() {
+    ArrayList<Integer> getNotChosenTiles() {
         return notChosenTiles;
     }
     

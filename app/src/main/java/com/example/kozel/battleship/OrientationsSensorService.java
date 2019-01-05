@@ -71,7 +71,6 @@ public class OrientationsSensorService extends Service implements SensorEventLis
                     time = System.currentTimeMillis();
                 }
             } else {
-                Log.d("TIME", (System.currentTimeMillis() - time) + "");
                 if (System.currentTimeMillis() - time >= 3000)
                     changed = false;
             }
@@ -79,7 +78,6 @@ public class OrientationsSensorService extends Service implements SensorEventLis
     }
 
     public void registerListener(AccelerationListener listener) {
-        Log.d("TESTING", "ON REGISTER");
         if (this.mListener == null)
             this.mListener = listener;
     }
