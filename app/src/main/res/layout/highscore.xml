@@ -37,6 +37,7 @@
                     android:layout_column="0"
                     android:background="@drawable/border"
                     android:text="@string/name_col"
+                    android:gravity="center"
                     android:textColor="#FF0000"
                     android:textSize="30sp"
                     android:textStyle="normal" />
@@ -48,6 +49,7 @@
                     android:layout_column="0"
                     android:background="@drawable/border"
                     android:text="@string/score_col"
+                    android:gravity="center"
                     android:textColor="#FF0000"
                     android:textSize="30sp"
                     android:textStyle="normal" />
