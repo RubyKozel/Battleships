@@ -19,7 +19,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
-        SQLiteDatabase db = this.getWritableDatabase();
     }
 
     static DatabaseHelper getInstance(Context context) {
@@ -55,8 +54,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     Cursor getAllData(String difficulty) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_HIGH_SCORES +
-                                    " WHERE " + KEY_DIFFICULTY + " = " + "\'" + difficulty + "\'" +
-                                    " ORDER BY " + KEY_SCORE +
-                                    " LIMIT 10" , null);
+                " WHERE " + KEY_DIFFICULTY + " = " + "\'" + difficulty + "\'" +
+                " ORDER BY " + KEY_SCORE +
+                " LIMIT 10", null);
     }
 }

@@ -1,6 +1,5 @@
 package com.example.kozel.battleship.Logic;
 
-
 public class Tile {
 
     private TileState state;
@@ -24,7 +23,9 @@ public class Tile {
         this.state = state;
     }
 
-    boolean isEmpty() { return isEmpty; }
+    boolean isEmpty() {
+        return isEmpty;
+    }
 
     void setNotEmpty() {
         this.isEmpty = false;

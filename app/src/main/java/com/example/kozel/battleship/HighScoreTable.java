@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import java.util.Locale;
 
 public class HighScoreTable extends Fragment {
@@ -53,13 +54,13 @@ public class HighScoreTable extends Fragment {
         View view = inflater.inflate(R.layout.highscore, container, false);
         int i = 0;
         if (cur != null && cur.getCount() > 0) {
-            while(cur.moveToNext()){
-                Log.d("TAG", "" + (TextView) view.findViewById(NAME_ID_ARRAY[i]));
-                Log.d("TAG", "" + (TextView) view.findViewById(SCORE_ID_ARRAY[i]));
+            while (cur.moveToNext()) {
+                Log.d("TAG", "" + view.findViewById(NAME_ID_ARRAY[i]));
+                Log.d("TAG", "" + view.findViewById(SCORE_ID_ARRAY[i]));
                 ((TextView) view.findViewById(NAME_ID_ARRAY[i])).setText(cur.getString(cur.getColumnIndex(DatabaseHelper.KEY_NAME)));
                 ((TextView) view.findViewById(NAME_ID_ARRAY[i])).setGravity(Gravity.CENTER);
                 ((TextView) view.findViewById(SCORE_ID_ARRAY[i])).setText(
-                        String.format(Locale.ENGLISH,"%d", cur.getInt(cur.getColumnIndex(DatabaseHelper.KEY_SCORE))));
+                        String.format(Locale.ENGLISH, "%d", cur.getInt(cur.getColumnIndex(DatabaseHelper.KEY_SCORE))));
                 ((TextView) view.findViewById(SCORE_ID_ARRAY[i])).setGravity(Gravity.CENTER);
                 i++;
             }

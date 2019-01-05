@@ -16,6 +16,7 @@ import android.view.ViewTreeObserver;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.example.kozel.battleship.Logic.BattleshipController;
 import com.example.kozel.battleship.Logic.Difficulty;
 import com.example.kozel.battleship.Logic.TileState;
@@ -56,8 +57,7 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
     public final static String BUNDLE_KEY = "BUNDLE";
     public final static int win = R.drawable.you_win;
     public final static int lose = R.drawable.game_over;
-    public final static int COMPUTER_DELAY = 4500;
-    public int count_clicks=0;
+    public int count_clicks = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,11 +153,11 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
 
         computerView.setOnItemClickListener((parent, view, position, id) -> {
             if (controller.getHuman().isTurn()) {
-                if(invokeHumanPlay(position, computerView.getChildAt(position))){
-                    if(!checkWinning(controller.getComputerBoard().getShipCount(), win))
+                if (invokeHumanPlay(position, computerView.getChildAt(position))) {
+                    if (!checkWinning(controller.getComputerBoard().getShipCount(), win))
                         controller.switchTurn();
                 }
-                if(!controller.getHuman().isTurn()){
+                if (!controller.getHuman().isTurn()) {
                     this.service.unregisterListener();
                     invokeComputerPlay();
                 }
@@ -166,7 +166,7 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
     }
 
     private void makeSound(TileState lastTileState) {
-        if(lastTileState == TileState.HIT)
+        if (lastTileState == TileState.HIT)
             bombSound.start();
         else
             splashSound.start();
@@ -218,8 +218,7 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
         }
     }
 
-    public int get_count_clicks()
-    {
+    public int get_count_clicks() {
         return count_clicks;
     }
 
@@ -228,7 +227,7 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
         @Override
         protected Void doInBackground(Void... voids) {
             int position = controller.computerPlay();
-            if(position != -1){
+            if (position != -1) {
                 makeSound(controller.getHumanBoard().getLastTileState());
                 runOnUiThread(() -> {
                     animationHandler.toggleProgressBarInvisible();
@@ -246,7 +245,7 @@ public class BoardsActivity extends AppCompatActivity implements OrientationsSen
             super.onPostExecute(aVoid);
             checkWinning(controller.getHumanBoard().getShipCount(), lose);
             handler.postDelayed(() -> BoardsActivity.this.service.registerListener(BoardsActivity.this),
-                            AnimationHandler.DURATION + AnimationHandler.DELAY);
+                    AnimationHandler.DURATION + AnimationHandler.DELAY);
         }
     }
 }

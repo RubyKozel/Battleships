@@ -10,6 +10,7 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.example.kozel.battleship.Logic.TileState;
 
 class AnimationHandler {
@@ -135,7 +136,7 @@ class AnimationHandler {
     }
 
     void animateTileOf(GridView playerView, TileState t, View view) {
-        if(t == TileState.HIT)
+        if (t == TileState.HIT)
             animate(playerView, view, R.drawable.explosion, 16);
         else if (t == TileState.MISS)
             animate(playerView, view, R.drawable.water_splash, 10);

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -15,7 +14,6 @@ import com.example.kozel.battleship.Logic.Difficulty;
 
 public class WinLoseActivity extends AppCompatActivity {
 
-    private ImageView status_game;
     private int status;
     private int clicks;
     private Difficulty difficulty;
@@ -30,10 +28,11 @@ public class WinLoseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_win_lose);
         myDb = DatabaseHelper.getInstance(getApplicationContext());
+
+        ImageView status_game;
 
         intent1 = new Intent(WinLoseActivity.this, MainActivity.class);
         intent2 = new Intent(WinLoseActivity.this, BoardsActivity.class);
@@ -56,8 +55,7 @@ public class WinLoseActivity extends AppCompatActivity {
                         writeName(b);
                     }
                 }
-            }
-            else{
+            } else {
                 writeName(b);
             }
         }
@@ -78,12 +76,11 @@ public class WinLoseActivity extends AppCompatActivity {
         finish();
     }
 
-    public void writeName(Bundle bund)
-    {
+    public void writeName(Bundle bund) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("You won! Please enter your name:");
-        View viewInflated = LayoutInflater.from(this).inflate(R.layout.prompt, (ViewGroup) findViewById(R.id.prompt_container), false);
-        final EditText input = (EditText) viewInflated.findViewById(R.id.user_name);
+        View viewInflated = LayoutInflater.from(this).inflate(R.layout.prompt, findViewById(R.id.prompt_container), false);
+        final EditText input = viewInflated.findViewById(R.id.user_name);
         builder.setView(viewInflated);
 
         builder.setPositiveButton(android.R.string.ok, (dialog, which) -> {

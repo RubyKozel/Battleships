@@ -223,12 +223,10 @@ public class Board {
     public ArrayList<Integer> getNotChosenTiles() {
         return notChosenTiles;
     }
-
-    ArrayList<Ship> getDestroyedShips() {
-        return destroyedShips;
+    
+    public TileState getLastTileState() {
+        return lastTileState;
     }
-
-    public TileState getLastTileState() { return lastTileState; }
 }
 
 

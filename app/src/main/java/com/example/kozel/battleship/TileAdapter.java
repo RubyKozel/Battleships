@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+
 import com.example.kozel.battleship.Logic.Board;
 import com.example.kozel.battleship.Logic.TileState;
 
@@ -25,11 +26,7 @@ public class TileAdapter extends BaseAdapter {
         this.height = height;
         this.width = width;
     }
-
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-
+    
     @Override
     public int getCount() {
         return size * size;
@@ -65,7 +62,7 @@ public class TileAdapter extends BaseAdapter {
             tileView.getImage().setImageResource(0);
             tileView.getImage().setBackgroundResource(R.drawable.border);
         } else {
-            if(state == TileState.HIT || state == TileState.DESTROYED) {
+            if (state == TileState.HIT || state == TileState.DESTROYED) {
                 tileView.getImage().setBackgroundResource(R.drawable.gridview_bg);
             }
             tileView.getImage().setImageResource(src);

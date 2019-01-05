@@ -47,7 +47,7 @@ public class BattleshipController {
 
 
     public boolean checkIfSomeoneWon(int shipcount) {
-        return shipcount==0;
+        return shipcount == 0;
     }
 
     public Board getComputerBoard() {

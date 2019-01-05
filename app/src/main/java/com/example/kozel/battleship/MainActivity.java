@@ -3,6 +3,7 @@ package com.example.kozel.battleship;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import com.example.kozel.battleship.Logic.Difficulty;
 
 public class MainActivity extends AppCompatActivity implements

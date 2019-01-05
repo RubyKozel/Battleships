@@ -14,7 +14,9 @@ public class HighScoresFragment extends Fragment {
 
     interface onButtonClickedListener {
         void onButtonEasyHighScore();
+
         void onButtonMediumHighScore();
+
         void onButtonHardHighScore();
     }
 
@@ -28,16 +30,19 @@ public class HighScoresFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.highscores_fragment, container, false);
 
-        view.findViewById(R.id.easy_button).setOnClickListener((v)-> {
-            if(HighScoresFragment.this.mListener != null) HighScoresFragment.this.mListener.onButtonEasyHighScore();
+        view.findViewById(R.id.easy_button).setOnClickListener((v) -> {
+            if (HighScoresFragment.this.mListener != null)
+                HighScoresFragment.this.mListener.onButtonEasyHighScore();
         });
 
-        view.findViewById(R.id.medium_button).setOnClickListener((v)-> {
-            if(HighScoresFragment.this.mListener != null) HighScoresFragment.this.mListener.onButtonMediumHighScore();
+        view.findViewById(R.id.medium_button).setOnClickListener((v) -> {
+            if (HighScoresFragment.this.mListener != null)
+                HighScoresFragment.this.mListener.onButtonMediumHighScore();
         });
 
-        view.findViewById(R.id.hard_button).setOnClickListener((v)-> {
-            if(HighScoresFragment.this.mListener != null) HighScoresFragment.this.mListener.onButtonHardHighScore();
+        view.findViewById(R.id.hard_button).setOnClickListener((v) -> {
+            if (HighScoresFragment.this.mListener != null)
+                HighScoresFragment.this.mListener.onButtonHardHighScore();
         });
 
         return view;
